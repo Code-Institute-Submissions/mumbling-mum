@@ -38,7 +38,9 @@
     </title>
   </head>
   <body>
-    <header class='container-fluid fixed-top'>
+    <header>
+        {% block header %}
+        {% endblock %}
     </header>
     <main>
         {% block content %}

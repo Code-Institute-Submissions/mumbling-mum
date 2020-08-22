@@ -2,11 +2,41 @@
 {% load static %}
 
 {% block title %}
-    The Mumbling Mum
+The Mumbling Mum
+{% endblock %}
+{% block header %}
+    <div class="row">
+        <div class="col-12">
+            </br>
+            <h1 class="text-center">The Mumbling Mum</h1></br>
+            <h6 class="text-center">Mumbling (usually rude words through clenched teeth) through motherhood since 2016.</h6>
+            </br>
+            <div class="row d-flex justify-content-center ">
+                <div class="col-2 d-flex justify-content-center">
+                    <a href="#" class="btn btn-secondary center-block">login</a>
+                </div>
+                <div class="col-2 d-flex justify-content-center">
+                    <a href="#" class="btn btn-secondary center-block">Register</a>
+                </div>
+            </div>
+            
+            </br> </br>
+        </div>
+    
+    </div>
 {% endblock %}
 
 {% block content %}
-    This is the home page 
-    Hopefully it will look  better soon!
-
+    <div class="row">
+        <div class="col-6">
+            <div class="container">
+                <h3 class="text-center">The blog</h3>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="container">
+                <h3 class="text-center">The Shop</h3>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,10 +1,11 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     {% block core_meta %}
     <!-- Allow support of older IE versions and eliminate validation errors during HTML validation -->
-    <meta http-equiv="x-UA-Compatible" content="ie=edge"> 
+    <meta http-equiv="x-UA-Compatible" content="ie=edge">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,8 +15,10 @@
     {% endblock %}
 
     {% block core_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     {% endblock %}
 
     {% block extra_css %}
@@ -24,9 +27,15 @@
     {% block core_js %}
     <!-- Scripts - Positioned in the head so they are loaded as quickly as possible -->
     <script src="https://kit.fontawesome.com/e9c73d7092.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
     {% endblock %}
 
     {% block extra_js %}
@@ -37,60 +46,77 @@
         {% block title %}
         {% endblock %}
     </title>
-  </head>
-  <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">The Mumbling Mum</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Mumblings</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Creations</a>
-                </li>
-                <li class="nav-item dropdown dropdown-menu-right">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    My Account
-                  </a>
-                  {% if user.is_authenticated %}
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="#">My Orders</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Log out</a>
-                  </div>
-                  {% else %}
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Login</a>
-                    <a class="dropdown-item" href="#">Register</a>
-                  </div>
-                  {% endif %}
-                </li>
-                <li class="list-inline-item">
-                    <a class="nav-link" href="#">
-                        <div class="text-center">
-                            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                            <!-- Add additional code for the shopping bag here -->
-                        </div>
-                    </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        {% block header %}
-        {% endblock %}
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    <footer>     
-    </footer>
-  </body>
+</head>
+
+<body>
+    <div class="bg-light">
+        <div class="container">
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">The Mumbling Mum</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Mumblings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Creations</a>
+                            </li>
+                            <li class="nav-item dropdown dropdown-menu-right">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    My Account
+                                </a>
+                                {% if user.is_authenticated %}
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">My Profile</a>
+                                    <a class="dropdown-item" href="#">My Orders</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Log out</a>
+                                </div>
+                                {% else %}
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Login</a>
+                                    <a class="dropdown-item" href="#">Register</a>
+                                </div>
+                                {% endif %}
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="nav-link" href="#">
+                                    <div class="text-center">
+                                        <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                                        <!-- Add additional code for the shopping bag here -->
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                {% block header %}
+                {% endblock %}
+            </header>
+            <main>
+                {% block content %}
+                {% endblock %}
+            </main>
+            <footer class="page-footer font-small bg-light pt-4">
+                <div class="container-fluid text-center">
+                    <h5 class="text-uppercase">The Mumbling Mum</h5>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+        <div class="footer-copyright text-center py-3">© 2020 Copyright: The Mumbling Mum
+        </div>
+        </footer>
+    </div>
+    </div>
+</body>
+
 </html>

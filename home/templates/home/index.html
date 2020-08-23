@@ -5,43 +5,61 @@
 The Mumbling Mum
 {% endblock %}
 {% block header %}
-    <div class="row">
-        <div class="col-12">
-            </br>
-            <h1 class="text-center">The Mumbling Mum</h1></br>
-            <h6 class="text-center">Mumbling (usually rude words through clenched teeth) through motherhood since 2016.</h6>
-            </br>
-            {% if user.is_authenticated %}
-                <div class="row d-flex justify-content-center ">
-                    <p>You are logged in as {{ user }}</p>
-                </div>
-            {% else %}
-                <div class="row d-flex justify-content-center ">
-                    <div class="col-2 d-flex justify-content-center">
-                        <a href="#" class="btn btn-secondary center-block">login</a>
-                    </div>
-                    <div class="col-2 d-flex justify-content-center">
-                        <a href="#" class="btn btn-secondary center-block">Register</a>
-                    </div>
-                </div>
-            {% endif %}
-            </br> </br>
+<div class="row">
+    <div class="col-12">
+        </br>
+        <h1 class="text-center">The Mumbling Mum</h1></br>
+        <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6>
+        </br>
+        {% if user.is_authenticated %}
+        <div class="row d-flex justify-content-center ">
+            <p>You are logged in as {{ user }}</p>
         </div>
-    
+        {% else %}
+        <div class="d-none d-sm-block">
+            <div class="row d-flex justify-content-center ">
+                <div class="col-sm-2 d-flex justify-content-center">
+                    <a href="#" class="btn btn-secondary center-block">login</a>
+                </div>
+                <div class="col-sm-2 d-flex justify-content-center">
+                    <a href="#" class="btn btn-secondary center-block">Register</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        </br> </br>
     </div>
+
+</div>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-6">
-            <div class="container">
-                <h3 class="text-center">The blog</h3>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="container">
-                <h3 class="text-center">The Shop</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <div id="home_blog_div">
+            </br>
+            <h2 class="text-center">Mum Mumblings</h2>
+            </br>
+            <div class="row">
+                <div class="col-6 inline-block text-center">
+                    <img id="me" src="/media/me.jpg">
+                </div>
+                <div class="col-6 inline-block">
+                    </br>
+                    <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.....</h5>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-sm-6">
+        <div id="home_shop_div">
+            </br>
+            <h2 class="text-center">Mumbling Creations</h2>
+            </br>
+            <h6 class="text-center">Handmade Textile Gifts and Accessories</h6>
+            </br>
+            <h3 class="text-center">COMING SOON!</h3>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -75,7 +75,7 @@
                                 </a>
                                 {% if user.is_authenticated %}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">My Profile</a>
+                                    <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
                                     <a class="dropdown-item" href="#">My Orders</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>

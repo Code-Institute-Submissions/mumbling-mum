@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django_countries.fields import countries
+from django_countries.fields import CountryField
 
 
 # Create your models here.
@@ -8,7 +8,7 @@ from django_countries.fields import countries
 class MemberProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # each user can only have one profile thus one to one field, if user is deleted delete profile
-    default_email_address = user.email # NOT SURE HOW TO GET FROM ALLAUTH??
+    # default_email_address = user.email # NOT SURE HOW TO GET FROM ALLAUTH??
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_street_address1 = models.CharField(max_length=80, null=True, blank=True)
     default_street_address2 = models.CharField(max_length=80, null=True, blank=True)

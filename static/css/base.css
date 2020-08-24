@@ -28,3 +28,9 @@ header {
 .fab {
     color: 	#737373;
 }
+
+#user_background {
+    background-image: url('/media/3127133.jpg');
+    background-size: cover; 
+    height:50vh;
+}

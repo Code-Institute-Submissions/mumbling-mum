@@ -53,7 +53,7 @@
         <div class="container">
             <header>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">The Mumbling Mum</a>
+                    <a class="navbar-brand" href="{% url 'home' %}">The Mumbling Mum</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -78,12 +78,12 @@
                                     <a class="dropdown-item" href="#">My Profile</a>
                                     <a class="dropdown-item" href="#">My Orders</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Log out</a>
+                                    <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
                                 </div>
                                 {% else %}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Login</a>
-                                    <a class="dropdown-item" href="#">Register</a>
+                                    <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+                                    <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
                                 </div>
                                 {% endif %}
                             </li>

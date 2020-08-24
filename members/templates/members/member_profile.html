@@ -1,4 +1,4 @@
-% extends "base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}
@@ -16,14 +16,24 @@ The Mumbling Mum
     </div>
 
 </div>
+
 {% endblock %}
 
 {% block content %}
 <div class="row">
+
+    <div class="row">
+        <div class="col-12">
+        </br></br>
+            <p>MemberProfile.user: {{ member }}</p>
+            <p>member_profile.default_email_address: {{ default_email_address }}</p>
+            <p>member_profile.default_phone_number: {{ default_phone_number }}</p>
+        </div>
+    </div>
     <!-- Add Default profile info and button to edit -->
 
     <!-- Add 'My previous orders'  -->
     <!-- if no orders display (There are no orders to display) -->
-    
+
 </div>
 {% endblock %}

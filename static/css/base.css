@@ -34,3 +34,7 @@ header {
     background-size: cover; 
     height:50vh;
 }
+
+.card {
+    padding:0;
+}

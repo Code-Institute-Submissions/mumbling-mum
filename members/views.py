@@ -14,7 +14,6 @@ def create_member_profile(sender=User, **kwargs):
     print('User signed up!!!')
     MemberProfile.objects.create(
     user = User.objects.get(username=User.username),
-    #default_email_address = EmailAddress
     default_phone_number = '',
     default_street_address1 = '',
     default_street_address2 = '',
@@ -33,7 +32,6 @@ def member_profile(request):
 
     context = {
         'member': member_profile.user,
-        'default_email_address' : member_profile.default_email_address,
         'default_phone_number' : member_profile.default_phone_number,
         'default_street_address1': member_profile.default_street_address1,
         'default_street_address2' : member_profile.default_street_address2,

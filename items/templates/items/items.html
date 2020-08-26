@@ -6,52 +6,58 @@ Mumbling Creations
 {% endblock %}
 {% block header %}
 <div class="row">
-    <div class="col-12">
-        </br>
-        <h1 class="text-center">Mumbling Creations</h1></br>
-        <h6 class="text-center">handmade Textile Gifts and Accessories</h6>
-        </br>
-        </br>
-    </div>
+  <div class="col-12">
+    </br>
+    <h1 class="text-center">Mumbling Creations</h1></br>
+    <h6 class="text-center">handmade Textile Gifts and Accessories</h6>
+    </br>
+    </br>
+  </div>
 </div>
 {% endblock %}
 
 {% block content %}
 </br>
 <div class="row">
-</br></br>
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{% url 'items' %}">All Items</a>
-    {% for c in categories %}
-    <a class="dropdown-item" href="{% url 'items_by_category' c.pk %}">{{c.display_name}}</a>
-    {% endfor %}
-    
+  </br></br>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{% url 'items' %}">All Items</a>
+      {% for c in categories %}
+      <a class="dropdown-item" href="{% url 'items_by_category' c.pk %}">{{c.display_name}}</a>
+      {% endfor %}
+
+    </div>
   </div>
 </div>
+<div class="row">
+  {% for item in items %}
 
-    {% for item in items %}
-
-    <div class="col-sm-4 card">
+  <div class="col-sm-4 card">
     <!-- <div class="card" style="width: 18rem;"> -->
-        <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ item.name }}</h5>
-          <p class="card-text">{{ item.description }}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>£{{ item.price }}</strong></li>
-          <!-- <li class="list-group-item">Dapibus ac facilisis in</li> -->
-          <!-- <li class="list-group-item">Vestibulum at eros</li> -->
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">{{ item.category }}</a>
-          <!-- <a href="#" class="card-link">Another link</a> -->
-        </div>
-      </div>
-      {% endfor %}
+    <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ item.name }}</h5>
+      <p class="card-text">{{ item.description|slice:":100"|safe }}....
+        <a href="#">more</a>
+      </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>£{{ item.price }}</strong></li>
+      <!-- Add rating here - Future feature -->
+    </ul>
+    <!-- If filtered by category don't show the category link-->
+    {% if filtered %}
+    {% else %}
+    <div class="card-body">Category:
+          <a href="{% url 'items_by_category' item.category.pk %}" class="card-link">{{ item.category.display_name}}</a>
+    </div>
+    {% endif %}
+  </div>
+{% endfor %}
 </div>
 {% endblock %}

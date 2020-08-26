@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from .models import Item, Category
 
-# Create your views here.
-
 def all_items(request):
     items = Item.objects.all()
     categories = Category.objects.all()
@@ -15,13 +13,11 @@ def all_items(request):
 def items_by_category(request, cat):
     items = Item.objects.filter(category=cat)
     categories = Category.objects.all()
+    filtered = True
     context = {
         'items': items,
         'categories': categories,
         'cat': cat,
+        'filtered' : filtered,
     }
     return render(request, 'items/items.html', context)
-
-
-
-

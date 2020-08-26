@@ -73,3 +73,10 @@ def edit_item(request, item_id):
         }
         return render(request, 'items/edit_item.html', context)
 
+@login_required
+def delete_item(request, item_id):
+    """ Delete an item from the store """
+    item = get_object_or_404(Item, pk=item_id)
+    item.delete()
+    return redirect(reverse('items'))
+

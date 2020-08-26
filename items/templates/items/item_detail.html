@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Mumbling Creations
+{% endblock %}
+{% block header %}
+<div class="row">
+    <div class="col-12">
+        </br>
+        <h1 class="text-center">Mumbling Creations</h1></br>
+        <h6 class="text-center">Handmade Textile Gifts and Accessories</h6>
+        </br>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+</br>
+
+<div class="row justify-content-center">
+    <div class="col-sm-4">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p><small>Category: <a href="{% url 'items_by_category' item.category.pk %}"
+                    class="card-link">{{ item.category.display_name}}</a></small></p>
+        <p class="card-text">{{ item.description }}</p>
+        <strong>£{{ item.price }}</strong>
+        </br>
+
+    </div>
+
+    <div class="col-sm-4">
+        <img class="img-fluid" src="{{ item.image.url }}" alt="Card image cap">
+    </div>
+
+</div>
+<div class="row justify-content-center">
+    <div class="col-sm-2">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Enter quantity:</label>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+            </div>        
+            <button type="submit" class="btn btn-secondary">Add to Bag</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

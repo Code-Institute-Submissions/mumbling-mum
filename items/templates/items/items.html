@@ -20,6 +20,18 @@ Mumbling Creations
 </br>
 <div class="row">
 </br></br>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% url 'items' %}">All Items</a>
+    {% for c in categories %}
+    <a class="dropdown-item" href="{% url 'items_by_category' c.pk %}">{{c.display_name}}</a>
+    {% endfor %}
+    
+  </div>
+</div>
 
     {% for item in items %}
 

@@ -43,7 +43,11 @@ Mumbling Creations
       
       <div class="col-sm-4 card">
       <!-- <div class="card" style="width: 18rem;"> -->
-        <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+        {% if item.image %}
+          <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+        {% else %}
+          <p> NO IMAGE </p>
+        {% endif %}
         <div class="card-body">
           <h5 class="card-title">{{ item.name }}</h5>
           <p class="card-text">{{ item.description|slice:":100"|safe }}....

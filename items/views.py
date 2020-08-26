@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import Item, Category
+from django.contrib.auth.decorators import login_required
+from .forms import ItemForm
 
 def all_items(request):
     """ A view to show all items """
@@ -31,5 +33,25 @@ def item_detail(request, item_id):
         'item' : item,
     }
     return render(request, 'items/item_detail.html', context)
+
+@login_required
+def add_item(request):
+    """ A view to allow staff to add a new item to the store """
+    if request.method == 'POST':
+        form = ItemForm(request.POST, request.FILES)
+        print("Hello !!! errors:{{form.errors}}")
+        if form.is_valid():
+            form.save()
+            # add message
+            return redirect(reverse('items'))
+        
+           
+    else:
+        form = ItemForm()
+        context = {
+            'form':form,
+        }
+        return render(request, 'items/add_item.html', context)
+
     
 

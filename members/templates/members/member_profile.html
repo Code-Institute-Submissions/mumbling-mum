@@ -28,6 +28,8 @@ The Mumbling Mum
             <p>MemberProfile.user: {{ member }}</p>
             <p>email_address: {{ user.email }}</p>
             <p>member_profile.default_phone_number: {{ default_phone_number }}</p>
+
+            <a href="{% url 'add_item' %}">Add an new item to the store</a>
         </div>
     </div>
     <!-- Add Default profile info and button to edit -->

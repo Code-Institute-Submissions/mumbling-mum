@@ -30,7 +30,11 @@ Mumbling Creations
     </div>
 
     <div class="col-sm-4">
+        {% if item.image %}
         <img class="img-fluid" src="{{ item.image.url }}" alt="Card image cap">
+        {% else %}
+          <p> NO IMAGE </p>
+        {% endif %}
     </div>
 
 </div>

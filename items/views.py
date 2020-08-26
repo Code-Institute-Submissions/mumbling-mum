@@ -44,8 +44,7 @@ def add_item(request):
             form.save()
             # add message
             return redirect(reverse('items'))
-        
-           
+        # add fail message
     else:
         form = ItemForm()
         context = {
@@ -53,5 +52,24 @@ def add_item(request):
         }
         return render(request, 'items/add_item.html', context)
 
+@login_required
+def edit_item(request, item_id):
+    """ A view to allow staff to edit an item to the store """
+    item = get_object_or_404(Item, pk=item_id)
     
+    if request.method == 'POST':
+        form = ItemForm(request.POST or None, request.FILES or None, instance=item)
+        print("Hello !!! errors:{{form.errors}}")
+        if form.is_valid():
+            item = form.save()
+            # add message
+            return redirect(reverse('items'))
+            # add fail message
+    else:
+        form = ItemForm(instance=item)
+        context = {
+            'form':form,
+            'item' : item,
+        }
+        return render(request, 'items/edit_item.html', context)
 

@@ -63,9 +63,13 @@ Mumbling Creations
         {% else %}
         <div class="card-body">Category:
           <a href="{% url 'items_by_category' item.category.pk %}" class="card-link">{{ item.category.display_name}}</a>
+          {% if user.is_staff %}
+          <p><a href="{% url 'edit_item' item.pk %}" class="card-link">Edit</a></p>
+          {% endif %}
         </div>
         {% endif %}
       </div>
+      
       {% endfor %}
     </div>
   </div>

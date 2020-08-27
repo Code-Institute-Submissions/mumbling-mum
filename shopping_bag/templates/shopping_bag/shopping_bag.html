@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+The Mumbling Mum
+{% endblock %}
+{% block header %}
+<div class="row">
+    <div class="col-12">
+        </br>
+        <h1 class="text-center">My Shopping Bag</h1></br>
+        </br>
+        
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if shopping_bag_items %}
+            <div class="table-responsive">
+
+            </div>
+            {% else %}
+            <div>
+                <p>Your Shopping Bag is empty</p>
+                <a href= "{% url 'items' %}"
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

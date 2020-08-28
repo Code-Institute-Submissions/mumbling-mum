@@ -10,26 +10,81 @@ The Mumbling Mum
         </br>
         <h1 class="text-center">My Shopping Bag</h1></br>
         </br>
-        
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            {% if shopping_bag_items %}
-            <div class="table-responsive">
 
+<div class="row justify-content-center">
+    <div class="col-8 ">
+        {% if shopping_bag_items %}
+        <div>
+            <table class="table">
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Image</th>
+                    <th>Sub Total</th>
+                </tr>
+                {% for bag_item in shopping_bag_items %}
+                <tr>
+                    <td>{{bag_item.item.name}}</td>
+
+                    <td>{{ bag_item.item.description|slice:":75"|safe }}....</td>
+
+                    <td>£{{bag_item.item.price}}</td>
+
+                    <td class="text-center">{{bag_item.quantity}}</td>
+
+                    <td><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
+
+                    <td>£{{ bag_item.item.price }}</td>
+                </tr>
+
+                {% endfor %}
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Delivery Cost:</strong></td>
+                    <td>
+                        <p>£{{ delivery_cost }} </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>Grand Total: </strong></td>
+                    <td>£{{ grand_total }}</td>
+                </tr>
+            </table>
+
+        </div>
+        {% else %}
+        <div>
+            <p>Your Shopping Bag is empty</p>
+        </div>
+        {% endif %}
+        <hr>
+        <div class="row justify-content-center">
+            <!-- <div class="col"></div> -->
+            <div class="col text-center">
+                <a class="btn btn-secondary" href="{% url 'items' %}">Keep Shopping</a>
             </div>
-            {% else %}
-            <div>
-                <p>Your Shopping Bag is empty</p>
-                <a href= "{% url 'items' %}">Keep Shopping</a>
+            <div class="col text-center">
+                <a class="btn btn-secondary" href="#">Checkout</a>
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
+</br>
 
 
 {% endblock %}

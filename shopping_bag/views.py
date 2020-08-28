@@ -15,7 +15,6 @@ def add_to_shopping_bag(request, item_id):
     # check to see if shopping_bag already exists in the session
     # if not create an empty dictionary to hold the shopping bag contents
     shopping_bag = request.session.get('shopping_bag', {})
-    print(shopping_bag)
 
     
     # if this item already exists in the shopping_bag increase the quantity by above quantity
@@ -26,6 +25,4 @@ def add_to_shopping_bag(request, item_id):
         shopping_bag[item_id]= quantity
     # update the session shopping_bag with the new contents
     request.session['shopping_bag'] = shopping_bag
-    print(shopping_bag)
-    print(request.session['shopping_bag'])
     return redirect(redirect_url)

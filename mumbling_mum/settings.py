@@ -73,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth', # required by allauth
                 'django.contrib.messages.context_processors.messages',
+                'shopping_bag.contexts.shopping_bag_contents', #make accessible accross all apps. 
             ],
         },
     },
@@ -155,3 +156,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STANDARD_DELIVERY_COST = 5

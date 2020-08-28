@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load shopping_bag_tools %}
 
 {% block title %}
 Shopping Bag
@@ -41,7 +42,7 @@ Shopping Bag
                         <a class="text-danger" href="{% url 'remove_from_shopping_bag' bag_item.item_id %}"><small>Remove</small></a>
                     </td>
                     <td><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
-                    <td>£{{ bag_item.item.price }}</td>
+                    <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>
                 </tr>
 
                 {% endfor %}

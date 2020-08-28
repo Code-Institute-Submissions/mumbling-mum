@@ -6,6 +6,7 @@ def shopping_bag_contents(request):
     shopping_bag_items = []
     total = 0
     product_count= 0
+    shopping_bag = request.session.get('shopping_bag', {})
 
     grand_total = settings.STANDARD_DELIVERY_COST + total
 

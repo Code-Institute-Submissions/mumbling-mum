@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-The Mumbling Mum
+Shopping Bag
 {% endblock %}
 {% block header %}
 <div class="row">
@@ -15,7 +15,6 @@ The Mumbling Mum
 {% endblock %}
 
 {% block content %}
-
 <div class="row justify-content-center">
     <div class="col-8 ">
         {% if shopping_bag_items %}
@@ -32,15 +31,16 @@ The Mumbling Mum
                 {% for bag_item in shopping_bag_items %}
                 <tr>
                     <td>{{bag_item.item.name}}</td>
-
                     <td>{{ bag_item.item.description|slice:":75"|safe }}....</td>
-
                     <td>£{{bag_item.item.price}}</td>
-
-                    <td class="text-center">{{bag_item.quantity}}</td>
-
+                    <td>
+                        <form method="POST" action="{% url 'adjust_shopping_bag' bag_item.item_id %}">
+                            {% csrf_token %}
+                            <input type="number"  id="quantity" name="quantity" min="0" max="5" value = "{{bag_item.quantity}}">
+                        </form>
+                        <a class="text-danger" href="{% url 'remove_from_shopping_bag' bag_item.item_id %}"><small>Remove</small></a>
+                    </td>
                     <td><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
-
                     <td>£{{ bag_item.item.price }}</td>
                 </tr>
 

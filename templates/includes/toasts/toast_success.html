@@ -8,4 +8,37 @@
   <div class="toast-body">
     {{ message }}
   </div>
+  <hr>
+<h6>Shopping Bag Contents:</h6>
+<table class="table">
+    <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    {% for bag_item in shopping_bag_items %}
+    <tr>
+        <td><small><small><strong>{{bag_item.item.name}}</strong></small></td>
+        <td><small>£{{bag_item.item.price}}</small></td>
+        <td><small>{{bag_item.quantity}}</small></td>
+        <td><small><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
+    </tr>
+
+    {% endfor %}
+
+    <tr>
+        <td></td>
+        <td><small><strong>Delivery Cost:</strong></small></td>
+        </td>
+        <td>
+            <p>£{{ delivery_cost }} </p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><strong>Grand Total: </strong></td>
+        <td>£{{ grand_total }}</td>
+    </tr>
+</table>
 </div>

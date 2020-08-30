@@ -31,7 +31,7 @@ Shopping Bag
                 </tr>
                 {% for bag_item in shopping_bag_items %}
                 <tr>
-                    <td>{{bag_item.item.name}}</td>
+                    <td><a href="{% url 'item_detail' bag_item.item_id %}"><strong>{{bag_item.item.name}}</strong></a></td>
                     <td>{{ bag_item.item.description|slice:":75"|safe }}....</td>
                     <td>£{{bag_item.item.price}}</td>
                     <td>

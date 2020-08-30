@@ -107,6 +107,14 @@
                 {% endblock %}
             </header>
             <main>
+                {% if messages %}
+                    <div class="container">
+                        {% for message in messages %}
+                            {% include 'includes/toasts/toast_success.html' %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 {% block content %}
                 {% endblock %}
             </main>
@@ -129,4 +137,7 @@
     $( document ).on( "click", "#delete, function() {
     $('#deleteModal').modal('hide');
     });
+</script>
+<script type="text/javascript">
+    $('.toast').toast('show');
 </script>

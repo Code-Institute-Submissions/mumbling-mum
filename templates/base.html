@@ -93,7 +93,7 @@
                                         <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                         <!-- Add additional code for the shopping bag here -->
                                         <small>{% if total %}
-                                            £{{total}}
+                                            £{{grand_total}}
                                         {% else %}
                                             £0.00
                                         {% endif %}</small>
@@ -107,10 +107,20 @@
                 {% endblock %}
             </header>
             <main>
+                <!-- Django message framework message output: Using Bootstrap toasts to display to user -->
                 {% if messages %}
                     <div class="container">
                         {% for message in messages %}
-                            {% include 'includes/toasts/toast_success.html' %}
+                            {% with message.level as level %}
+                                {% if level == 40 %}
+                                    {% include 'includes/toasts/toast_error.html' %}
+                                {% elif level == 30 %}
+                                    {% include 'includes/toasts/toast_warning.html' %}
+                                {% elif level == 25 %}
+                                    {% include 'includes/toasts/toast_success.html' %}
+                                {% else %}
+                                    {% include 'includes/toasts/toast_info.html' %}
+                                {% endif %}
                         {% endfor %}
                     </div>
                 {% endif %}
@@ -133,11 +143,11 @@
 </body>
 
 </html>
-<script>
-    $( document ).on( "click", "#delete, function() {
-    $('#deleteModal').modal('hide');
-    });
-</script>
 <script type="text/javascript">
-    $('.toast').toast('show');
+// used for staff member as an additional check before they delete an item in the store. 
+$( document ).on( "click", "#delete", function() {
+    $('#deleteModal').modal('hide');
+});
+// used to display messages to the user. e.g. they have added an item to the bag.
+$('.toast').toast('show');
 </script>

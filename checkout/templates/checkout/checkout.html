@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load checkout_tools %}
 
 {% block title %}
 Checkout
@@ -19,14 +20,63 @@ Checkout
 </br>
 
 <div class="row justify-content-center">
-    <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ order_form.as_p }}
-        <a class="btn btn-secondary" href="{% url 'items' %}">Cancel</a>
-        <button class="btn btn-secondary" type="submit">Add Item</button>
-    </form>
+    <div class="col-md-6 text-center">
+        <h4>Delivery and Payment</h4>
+        <hr>
+        <!-- display order form -->
+        <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ order_form.as_p }}
+            <a class="btn btn-secondary" href="{% url 'items' %}">Cancel</a>
+            <button class="btn btn-secondary" type="submit">Place Order</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-center">Order Summary</h4>
+        <hr>
+        <!-- display order summary -->
+        <table class="table">
+            <tr>
+                <th>Item</th>
+                <th></th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Sub Total</th>
+            </tr>
+        {% for bag_item in shopping_bag_items %}
+        <tr>
+            <td><a href="{% url 'item_detail' bag_item.item_id %}"><strong>{{bag_item.item.name}}</strong></a></td>
+            <td>{{ bag_item.item.description|slice:":40"|safe }}....</td>
+            <td>£{{bag_item.item.price}}</td>
+            <td>{{bag_item.quantity}}</td>
+            <td><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
+            <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>
+            
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>Delivery Cost:</strong></td>
+            <td>
+                <p>£{{ delivery_cost }} </p>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>Grand Total: </strong></td>
+            <td>£{{ grand_total }}</td>
+        </tr>
+    </table>        
+    </div>
 </div>
 
 
-        
+
 {% endblock %}

@@ -20,19 +20,42 @@ Checkout
 </br>
 
 <div class="row justify-content-center">
-    <div class="col-md-6 text-center">
-        <h4>Delivery and Payment</h4>
+    <div class="col-md-6">
+        <h6>Please fill out the form below to complete your order</h6>
         <hr>
-        <!-- display order form -->
-        <form method="POST" action="{% url 'add_item' %}" enctype="multipart/form-data">
+        <!-- display order form - updated to use crispy forms to allow easy bootstrap styling-->
+        <form id="payment-forms" method="POST" action="{% url 'checkout' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ order_form.as_p }}
-            <a class="btn btn-secondary" href="{% url 'items' %}">Cancel</a>
+            <fieldset>
+                <legend>Details:</legend>
+                {{ order_form.full_name | as_crispy_field }}
+                {{ order_form.email | as_crispy_field }}
+            </fieldset>
+            <fieldset>
+                <legend>Delivery:</legend>
+                {{ order_form.phone_number | as_crispy_field }}
+                {{ order_form.street_address1 | as_crispy_field }}
+                {{ order_form.street_address2 | as_crispy_field }}
+                {{ order_form.town_or_city | as_crispy_field }}
+                {{ order_form.county | as_crispy_field }}
+                {{ order_form.postcode | as_crispy_field }}
+                {{ order_form.country | as_crispy_field }}
+            </fieldset>
+            <fieldset>
+                <legend>Payment</legend>
+                <!-- stripe card element -->
+                <div id="card-element"></div>
+                <!-- form errors to be displayed here -->
+                <div id="card-errors"></div>
+            </fieldset>
+            
+
+            <a class="btn btn-secondary" href="{% url 'view_shopping_bag' %}">Adjust shopping bag</a>
             <button class="btn btn-secondary" type="submit">Place Order</button>
         </form>
     </div>
     <div class="col-md-6">
-        <h4 class="text-center">Order Summary</h4>
+        <h6>Order Summary</h6>
         <hr>
         <!-- display order summary -->
         <table class="table">

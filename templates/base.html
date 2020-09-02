@@ -36,6 +36,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <!-- STRIPE (in base to allow for fraud detection) -->
+    <script src="https://js.stripe.com/v3/"></script>
     {% endblock %}
 
     {% block extra_js %}
@@ -144,6 +146,7 @@
 </body>
 
 </html>
+{% block postloadjs %}
 <script type="text/javascript">
 // used for staff member as an additional check before they delete an item in the store. 
 $( document ).on( "click", "#delete", function() {
@@ -152,3 +155,4 @@ $( document ).on( "click", "#delete", function() {
 // used to display messages to the user. e.g. they have added an item to the bag.
 $('.toast').toast('show');
 </script>
+{% endblock %}

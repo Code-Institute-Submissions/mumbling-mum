@@ -2,6 +2,11 @@
 {% load static %}
 {% load checkout_tools %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+
 {% block title %}
 Checkout
 {% endblock %}
@@ -47,6 +52,7 @@ Checkout
                 <div id="card-element"></div>
                 <!-- form errors to be displayed here -->
                 <div id="card-errors"></div>
+                <br/>
             </fieldset>
             
 
@@ -99,7 +105,11 @@ Checkout
     </table>        
     </div>
 </div>
+{% endblock %}
 
-
-
+{% block postloadjs %}
+    {{ block.super}}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

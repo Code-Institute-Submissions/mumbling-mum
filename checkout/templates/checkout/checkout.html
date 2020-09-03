@@ -29,7 +29,7 @@ Checkout
         <h6>Please fill out the form below to complete your order</h6>
         <hr>
         <!-- display order form - updated to use crispy forms to allow easy bootstrap styling-->
-        <form id="payment-form" method="POST" action="{% url 'checkout' %}" enctype="multipart/form-data">
+        <form id="payment-form" method="POST" action="{% url 'checkout' %}" >
             {% csrf_token %}
             <fieldset>
                 <legend>Details:</legend>

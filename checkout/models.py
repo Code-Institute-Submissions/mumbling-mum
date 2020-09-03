@@ -3,6 +3,8 @@ import uuid
 from django.db import models
 from members.models import MemberProfile
 from items.models import Item
+from django.db.models import Sum
+from django.conf import settings
 
 from django_countries.fields import CountryField
 
@@ -22,8 +24,8 @@ class Order(models.Model):
     postcode = models.CharField(max_length=20, null=False, blank=False)
     county = models.CharField(max_length=80, null=False, blank=False)
     country = CountryField(blank_label='Country *', null=False, blank=False)
-    date = models. DateTimeField(auto_now_add=True)
-    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=False)
     order_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
     grand_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
     original_bag_items = models.TextField(null=False,blank=False,default='')
@@ -38,21 +40,17 @@ class Order(models.Model):
 
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum']
         # Aggregate - the value of multiple rows is grouped together to form a single summary value.
-
-        self.grand_total = delivery_cost + self.order_total
+        self.delivery_cost = settings.STANDARD_DELIVERY_COST 
+        self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
     
     def save(self, *args, **kwargs):
         # Override the original save method to set the order number if it hasn't already been set.
         if not self.order_no:
-            self.order_no = self._generate_order_no
-        super().save(*args, *kwargs)
+            self.order_no = self._generate_order_no()
+        super().save(*args, **kwargs)
     
-    
-
-
-
     def __str__(self):
         return self.order_no
 

@@ -25,9 +25,9 @@ class Order(models.Model):
     county = models.CharField(max_length=80, null=False, blank=False)
     country = CountryField(blank_label='Country *', null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
-    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=False)
-    order_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
-    grand_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
+    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, default=0)
+    order_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, default=0)
+    grand_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, default=0)
     original_bag_items = models.TextField(null=False,blank=False,default='')
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
@@ -55,8 +55,8 @@ class Order(models.Model):
         return self.order_no
 
 class OrderLineItem(models.Model):
-    order = models.ForeignKey(Order, null=True, blank=True, on_delete=models.CASCADE, related_name = 'lineitems')
-    item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name = 'lineitems')
+    item = models.ForeignKey(Item, null=False, blank=False, on_delete=models.CASCADE)
     quantity =  models.IntegerField(null=False, blank=False, default=0)
     # line item total is not editable as it is automatically calculated when the line items is saved.
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)

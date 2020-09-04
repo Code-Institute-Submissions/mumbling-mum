@@ -49,7 +49,7 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_shopping_bag'))
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number] ))
+            return redirect(reverse('checkout_success', args=[order.order_no] ))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check the information.')
@@ -94,7 +94,7 @@ def checkout_success(request, order_no):
         Your Order Number is {order_no}. A confirmation \
         email will be sent to {order.email}')
     if 'shopping_bag' in request.session:
-        del request,session['shopping_bag']
+        del request.session['shopping_bag']
     
     template = 'checkout/checkout_success.html'
     context = {

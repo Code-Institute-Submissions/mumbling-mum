@@ -10,7 +10,8 @@ class OrderAdmin(admin.ModelAdmin):
     # declare some firelds read only so that they cannot be edited and compromise the order
     readonly_fields =('order_no', 'date',
                      'delivery_cost', 'order_total', 
-                     'grand_total',)
+                     'grand_total', 'original_bag_items',
+              'stripe_pid' )
     # declare the fields to maintain the order. 
     fields = ('order_no', 'member_profile', 'date', 'full_name',
               'email', 'phone_number', 'street_address1',

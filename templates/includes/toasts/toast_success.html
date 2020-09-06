@@ -10,50 +10,52 @@
     {{ message }}
   </div>
   <hr>
-  {% if shopping_bag_items %}
-  <div class="col">
-    <h6>Shopping Bag Contents:</h6>
-  </div>
-  <table class="table">
-    <tr>
-      <th>Item</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th></th>
-    </tr>
-    {% for bag_item in shopping_bag_items %}
-    <tr>
-      <td><small><small><strong>{{bag_item.item.name}}</strong></small></td>
-      <td><small>£{{bag_item.item.price}}</small></td>
-      <td><small>{{bag_item.quantity}}</small></td>
-      <td><small><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
-    </tr>
-
-    {% endfor %}
-
-    <tr>
-      <td></td>
-      <td><small><strong>Delivery Cost:</strong></small></td>
-      </td>
-      <td>
-        <p>£{{ delivery_cost }} </p>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><strong>Grand Total: </strong></td>
-      <td>£{{ grand_total }}</td>
-    </tr>
-  </table>
-  <div class="row">
-    <div class="col text-center">
-      <a class="btn btn-secondary" href="{% url 'view_shopping_bag' %}">View Bag</a>
+  {% if member_profile_page %}
+  {% else %}
+    {% if shopping_bag_items %}
+    <div class="col">
+      <h6>Shopping Bag Contents:</h6>
     </div>
-    <div class="col text-center">
-      <a class="btn btn-secondary" href="{% url 'checkout' %}">Checkout</a>
-    </div>
-  </div>
-  </br>
-</div>
+    <table class="table">
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+      {% for bag_item in shopping_bag_items %}
+      <tr>
+        <td><small><small><strong>{{bag_item.item.name}}</strong></small></td>
+        <td><small>£{{bag_item.item.price}}</small></td>
+        <td><small>{{bag_item.quantity}}</small></td>
+        <td><small><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
+      </tr>
 
+      {% endfor %}
+
+      <tr>
+        <td></td>
+        <td><small><strong>Delivery Cost:</strong></small></td>
+        </td>
+        <td>
+          <p>£{{ delivery_cost }} </p>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><strong>Grand Total: </strong></td>
+        <td>£{{ grand_total }}</td>
+      </tr>
+    </table>
+    <div class="row">
+      <div class="col text-center">
+        <a class="btn btn-secondary" href="{% url 'view_shopping_bag' %}">View Bag</a>
+      </div>
+      <div class="col text-center">
+        <a class="btn btn-secondary" href="{% url 'checkout' %}">Checkout</a>
+      </div>
+    </div>
+    </br>
+  </div>
+  {% endif %}
 {% endif %}

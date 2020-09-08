@@ -121,7 +121,7 @@ WSGI_APPLICATION = 'mumbling_mum.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # if running locally use sqlite3 else use postgres
-if 'DATABASE_URL in os.environ:
+if 'DATABASE_URL' in os.environ:
     DATABASES = {
     'default': dj_database_url.parse('DATABASE_URL')
 }

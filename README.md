@@ -20,8 +20,20 @@ This section is also where you would share links to any wireframes, mockups, dia
 
 ## Features
 
+### Creations
 
+The Creations page contains all the items for sale. They can be filtered by Category.
 
+SKU - Stock Keeping Unit
+Even though the store is small, I thought it prudent for each Item to have a SKU. I decided to keep the SKU simple. I have used the category pk multiplied by 10 and the Item PK multiplied by 10. e.g. category.pk=1 and item.pk=20 SKU =10200. This ensures the SKU is always unique and never starts with 0. It also allows items to be easily identified and ordered by the SKU. 
+
+When logged in a staff Member can Add, Edit and Delete items. If an items category is changed then the SKU will be updated to reflect this.  
+
+### Shopping Bag
+
+### Checkout
+
+### Use of Toasts across the site
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
 ### Existing Features

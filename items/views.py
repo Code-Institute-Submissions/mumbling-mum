@@ -39,12 +39,15 @@ def add_item(request):
     """ A view to allow staff to add a new item to the store """
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)
-        print("Hello !!! errors:{{form.errors}}")
         if form.is_valid():
             form.save()
-            # add message
+            # Create SKU
+            sku1 = str(item.category.pk*10)
+            sku2 = str(item.pk*10)
+            sku = sku1 + sku2
+            print(sku)
+            Item.objects.filter(pk=item.pk).update(sku=sku)
             return redirect(reverse('items'))
-        # add fail message
     else:
         form = ItemForm()
         context = {
@@ -61,14 +64,14 @@ def edit_item(request, item_id):
         form = ItemForm(request.POST or None, request.FILES or None, instance=item)
         if form.is_valid():
             item = form.save()
-            # create sku
+            # update sku - if Category changes
             sku1 = str(item.category.pk*10)
             sku2 = str(item.pk*10)
             sku = sku1 + sku2
             print(sku)
             Item.objects.filter(pk=item.pk).update(sku=sku)
             return redirect(reverse('items'))
-            # add fail message
+
     else:
         form = ItemForm(instance=item)
         context = {

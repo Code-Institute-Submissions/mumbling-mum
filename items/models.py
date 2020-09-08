@@ -27,7 +27,11 @@ class Item(models.Model):
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     # Option to add image as a jpg or a URL.  Image is not a required field.
     sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
-    # Added sku as may be required if the product line increases.
+    # SKU calculated by the category pk and item pk.
+    clearance = models.BooleanField(default=False, editable=False)
+    # Added to allow clearance items to maintain their category and SKU.
+    original_price = models.DecimalField(max_digits=6, decimal_places=2, editable=False, default=0)
+    # When item is flagged for clearance this will be populated with the original price. 
 
     def __str__(self):
         return self.name

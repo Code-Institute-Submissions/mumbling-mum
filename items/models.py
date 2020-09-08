@@ -26,9 +26,7 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     # Option to add image as a jpg or a URL.  Image is not a required field.
-    star_rating = models.IntegerField(null=True, blank=True)
-    # future enhancement to add ability for members who have purchased the item to add a review
-    sku = models.CharField(max_length=254, null=True, blank=True)
+    sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
     # Added sku as may be required if the product line increases.
 
     def __str__(self):

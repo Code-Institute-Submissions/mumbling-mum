@@ -59,10 +59,14 @@ def edit_item(request, item_id):
     
     if request.method == 'POST':
         form = ItemForm(request.POST or None, request.FILES or None, instance=item)
-        print("Hello !!! errors:{{form.errors}}")
         if form.is_valid():
             item = form.save()
-            # add message
+            # create sku
+            sku1 = str(item.category.pk*10)
+            sku2 = str(item.pk*10)
+            sku = sku1 + sku2
+            print(sku)
+            Item.objects.filter(pk=item.pk).update(sku=sku)
             return redirect(reverse('items'))
             # add fail message
     else:

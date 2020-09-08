@@ -50,7 +50,7 @@ Mumbling Creations
         {% endif %}
         <div class="card-body">
           <a href="{% url 'item_detail' item.pk %}"><h5 class="card-title">{{ item.name }}</h5></a>
-          <p class="card-text">{{ item.description|slice:":100"|safe }}....
+          <p class="card-text">{{ item.description|slice:":100"|safe }}....itempk:{{item.pk}} catpk:{{item.category.pk}}
             <a href="{% url 'item_detail' item.pk %}">more</a>
           </p>
         </div>

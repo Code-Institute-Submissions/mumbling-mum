@@ -1,0 +1,1 @@
+web: gunicorn mumbling_mum.wsgi:application

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+The Mumbling Mum
+{% endblock %}
+{% block header %}
+<div class="row">
+    <div class="col-12">
+        </br>
+        <h1 class="text-center">Mum Mumblings</h1></br>
+        <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6>
+        
+    </br>
+    <div class="row">
+        <div class="col-4 inline-block text-center">
+            <img id="me" src="/media/me.jpg">
+        </div>
+        <div class="col-8 inline-block">
+            </br>
+            <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.....</h5>
+        </div>
+    </div>
+        </br> </br>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block content %}
+
+ 
+    {% for entry in object_list %}
+<div class="row">
+    <div class="col">
+        <h4>{{ entry.title }}</h4>
+        <p>{{ entry.author }}</p>
+        <p>{{ entry.body }}</p>
+    </div>
+    <div class="col-sm-3">
+        {% if entry.image %}
+        <img class="img-thumbnail" src="{{ entry.image}}" >
+        {% elif entry.image_url %}
+        <img class="img-thumbnail" src="{{ entry.image_url}}" >
+        {% else %}
+        <p> NO IMAGE </p>
+        {% endif %}
+    </div>
+
+</div>
+    {% endfor %}
+</ul>
+    
+{% endblock %}

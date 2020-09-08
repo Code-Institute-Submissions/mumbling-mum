@@ -80,6 +80,16 @@ If this section grows too long, you may want to split it off into a separate fil
 
 ## Deployment
 
+I have deployed the mumbling mum app using Heroku. 
+In order to do this, I first logged in to my Heroku account and created a new app. 
+In the dashboard of the new app I selected 'Resources' and in the 'add-ons' section I searched for 'Heroku Postgres' I selected this and provisioned it for the application. This in turn created a heroku config var: DATABASE_URL which I was then able to copy.
+Back in VSCode I installed dj_database_url and modified the DATABASE section in settings.py to look for the DATABASE_URL in the environment variables, so, when deployed it will use the Heroku Postgres Database.   
+I then installed 'gunicorn' and updated my requirements.txt (pip freeze > requirements.txt). Next I created the Procfile.
+I then logged in to Heroku (heroku login). At this point I did not want Heroku to collect my static files when it deployed (as I would be using AWS S3)and so I set DISABLE_COLLECTSTATIC to 1. (heroku config:set DISABLE_COLLECTSTATIC=1). 
+I then added all the environment variables in the config vars.
+I then added and committed my code to GIT then pushed to git hub and Heroku. I also linked my repository to Heroku so that with every push to the master branch would also be deployed to Heroku.
+
+
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
 
 In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:

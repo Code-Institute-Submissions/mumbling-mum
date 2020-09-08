@@ -32,6 +32,8 @@ class Item(models.Model):
     # Added to allow clearance items to maintain their category and SKU.
     original_price = models.DecimalField(max_digits=6, decimal_places=2, editable=False, default=0)
     # When item is flagged for clearance this will be populated with the original price. 
+    out_of_stock = models.BooleanField(default=False, editable=False)
+    # Admin can flag an item as out of stock
 
     def __str__(self):
         return self.name

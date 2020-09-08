@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['the-mumbling-mum.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['the-mumbling-mum.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -123,8 +123,8 @@ WSGI_APPLICATION = 'mumbling_mum.wsgi.application'
 # if running locally use sqlite3 else use postgres
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-    'default': dj_database_url.parse('DATABASE_URL')
-}
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
 else:
     DATABASES = {
         'default': {

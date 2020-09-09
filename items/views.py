@@ -87,3 +87,41 @@ def delete_item(request, item_id):
     item.delete()
     return redirect(reverse('items'))
 
+@login_required
+def manage_items(request):
+    """ View to display All Items and management actions """ 
+    user= request.user
+    if user.is_staff:
+        items = Item.objects.all()
+        categories = Category.objects.all()
+        template = 'items/manage_items.html'
+        context = {
+            'user':user,
+            'items': items,
+            'categories': categories,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+@login_required
+def manage_items_by_category(request, cat):
+    """ A view to show items filtered by category """
+    user= request.user
+    if user.is_staff:
+        items = Item.objects.filter(category=cat)
+        categories = Category.objects.all()
+        template = 'items/manage_items.html'
+        filtered = True
+        context = {
+            'items': items,
+            'categories': categories,
+            'cat': cat,
+            'filtered' : filtered,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+

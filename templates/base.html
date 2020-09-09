@@ -75,12 +75,24 @@
                                     My Account
                                 </a>
                                 {% if user.is_authenticated %}
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
-                                    <a class="dropdown-item" href="#">My Orders</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
-                                </div>
+                                    {% if user.is_staff %}
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'admin_page' %}">Mumbling Admin</a>
+                                        <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
+                                        <!-- REMEMBER TO SORT ORDER PAGE -->
+                                        <a class="dropdown-item" href="#">My Orders</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                                    </div>
+                                    {% else %}
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
+                                        <!-- REMEMBER TO SORT ORDER PAGE -->
+                                        <a class="dropdown-item" href="#">My Orders</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                                    </div>
+                                    {% endif %}
                                 {% else %}
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>

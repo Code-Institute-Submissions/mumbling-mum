@@ -61,3 +61,22 @@ def member_profile(request):
     return render(request, template, context)
 
 # will need to add a view for the order detail later
+
+@login_required
+def admin_page(request):
+    """ View to display Admin options """ 
+    user= request.user
+    if user.is_staff:
+        # show page
+        template = 'members/admin_page.html'
+        context = {
+            'user':user,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page
+        return redirect(reverse('home'))
+
+
+
+

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import Item, Category
 from django.contrib.auth.decorators import login_required
-from .forms import ItemForm
+from .forms import ItemForm, CategoryForm
 
 def all_items(request):
     """ A view to show all items """
@@ -11,7 +11,7 @@ def all_items(request):
         'items': items,
         'categories': categories,
     }
-    return render(request, 'items/items.html', context)
+    return render(request,'items/items.html', context)
 
 def items_by_category(request, cat):
     """ A view to show items filtered by category """
@@ -39,18 +39,22 @@ def add_item(request):
     """ A view to allow staff to add a new item to the store """
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)
-        print("Hello !!! errors:{{form.errors}}")
         if form.is_valid():
-            form.save()
-            # add message
-            return redirect(reverse('items'))
-        # add fail message
+            item=form.save()
+            # Create SKU
+            sku1 = str(item.category.pk*10)
+            sku2 = str(item.pk*10)
+            sku = sku1 + sku2
+            print(sku)
+            Item.objects.filter(pk=item.pk).update(sku=sku)
+            return redirect(reverse('manage_items'))
     else:
         form = ItemForm()
         context = {
             'form':form,
         }
-        return render(request, 'items/add_item.html', context)
+        template = 'items/add_item.html'
+        return render(request, template, context)
 
 @login_required
 def edit_item(request, item_id):
@@ -59,12 +63,16 @@ def edit_item(request, item_id):
     
     if request.method == 'POST':
         form = ItemForm(request.POST or None, request.FILES or None, instance=item)
-        print("Hello !!! errors:{{form.errors}}")
         if form.is_valid():
             item = form.save()
-            # add message
-            return redirect(reverse('items'))
-            # add fail message
+            # update sku - if Category changes
+            sku1 = str(item.category.pk*10)
+            sku2 = str(item.pk*10)
+            sku = sku1 + sku2
+            print(sku)
+            Item.objects.filter(pk=item.pk).update(sku=sku)
+            return redirect(reverse('manage_items'))
+
     else:
         form = ItemForm(instance=item)
         context = {
@@ -77,6 +85,102 @@ def edit_item(request, item_id):
 def delete_item(request, item_id):
     """ Delete an item from the store """
     item = get_object_or_404(Item, pk=item_id)
+    print(item)
     item.delete()
-    return redirect(reverse('items'))
+    return redirect(reverse('manage_items'))
 
+@login_required
+def manage_items(request):
+    """ View to display All Items and management actions """ 
+    user= request.user
+    if user.is_staff:
+        items = Item.objects.all()
+        categories = Category.objects.all()
+        template = 'items/manage_items.html'
+        context = {
+            'user':user,
+            'items': items,
+            'categories': categories,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+@login_required
+def manage_items_by_category(request, cat_id):
+    """ A view to show items filtered by category """
+    user= request.user
+    if user.is_staff:
+        items = Item.objects.filter(category=cat_id)
+        categories = Category.objects.all()
+        template = 'items/manage_items.html'
+        filtered = True
+        context = {
+            'items': items,
+            'categories': categories,
+            'cat_id': cat_id,
+            'filtered' : filtered,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+login_required
+def manage_categories(request):
+    """ A view to show items filtered by category """
+    user= request.user
+    if user.is_staff:
+        categories = Category.objects.all()
+        template = 'items/manage_categories.html'
+        context = {
+            'categories': categories,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+@login_required
+def add_category(request):
+    """ A view to allow staff to add a new item to the store """
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('manage_categories'))
+    else:
+        form = CategoryForm()
+        context = {
+            'form':form,
+        }
+        template = 'items/add_category.html'
+        return render(request, template, context)
+
+@login_required
+def edit_category(request, cat_id):
+    """ A view to allow staff to edit an item to the store """
+    print(cat_id)
+    category = get_object_or_404(Category, pk=cat_id)
+    print(category)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST or None, request.FILES or None, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('manage_categories'))
+
+    else:
+        form = CategoryForm(instance=category)
+        context = {
+            'form':form,
+            'category' : category,
+        }
+        return render(request, 'items/edit_category.html', context)
+
+@login_required
+def delete_category(request, cat_id):
+    """ Delete an item from the store """
+    category = get_object_or_404(Category, pk=cat_id)
+    category.delete()
+    return redirect(reverse('manage_categories'))

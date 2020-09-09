@@ -20,8 +20,20 @@ This section is also where you would share links to any wireframes, mockups, dia
 
 ## Features
 
+### Creations
 
+The Creations page contains all the items for sale. They can be filtered by Category.
 
+SKU - Stock Keeping Unit
+Even though the store is small, I thought it prudent for each Item to have a SKU. I decided to keep the SKU simple. I have used the category pk multiplied by 10 and the Item PK multiplied by 10. e.g. category.pk=1 and item.pk=20 SKU =10200. This ensures the SKU is always unique and never starts with 0. It also allows items to be easily identified and ordered by the SKU. 
+
+When logged in a staff Member can Add, Edit and Delete items. If an items category is changed then the SKU will be updated to reflect this.  
+
+### Shopping Bag
+
+### Checkout
+
+### Use of Toasts across the site
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
 ### Existing Features
@@ -113,3 +125,6 @@ In addition, if it is not obvious, you should also describe how to run your code
 - I received inspiration for this project from X
 
 https://www.etsy.com/uk/listing/823858959/garden-bird-bunting?gpla=1&gao=1&&utm_source=google&utm_medium=cpc&utm_campaign=shopping_uk_en_gb_ds-b-Paper_Goods-paper_and_party_supplies-party_supplies-party_decor-garlands_flags_and_bunting&utm_custom1=67a3938d-5bea-4087-8192-8e8433a6a654&utm_content=go_6479445330_78125087672_380846581081_pla-315318922049_c__823858959engb&utm_custom2=6479445330&gclid=EAIaIQobChMIwZvxpKG-6wIViK3tCh2u5AlQEAQYAiABEgLf1_D_BwE
+
+I followed the information in this article to use flexbox to get the footer to stay at the bottom of the page:
+https://dev.to/domysee/keeping-the-footer-at-the-bottom-with-css-flexbox-5h5f

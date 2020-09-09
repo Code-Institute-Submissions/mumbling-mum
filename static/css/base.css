@@ -1,10 +1,39 @@
-header {
-    background-image: url('/media/3127130_cropped.jpg');
-    /* background-image: url('/media/3127133.jpg'); */
-    background-size: cover; 
+@media only screen and (max-width: 1199px) {
+    header {
+        background-image: url('/media/3127133_cropped.jpg');
+        background-size: cover;
+    }
 }
 
-#home_blog_div{
+@media only screen and (min-width: 1200px) {
+    header {
+        background-image: url('/media/3127133_lg_cropped.jpg');
+        background-size: cover;
+    }
+}
+
+/* ----Keep footer at bottom----- */
+html,
+body {
+ height: 100%;
+ width: 100%;
+}
+.main-container {
+ min-height: 100vh; /* will cover the 100% of viewport */
+ display: flex;
+ flex-direction: column;
+ align-items: stretch; /* height of your footer */
+}
+main {
+    flex-grow: 1;
+}
+header, main, footer {
+    flex-shrink: 0;
+}
+/* ------end----------- */
+
+#home_blog_div,
+#manage-mumblings {
     background-image: url('/media/140964-OSX7N5-597.jpg'); 
     background-size: cover; 
     margin-top:2vh;
@@ -18,7 +47,8 @@ header {
 }
 
 
-#home_shop_div{
+#home_shop_div,
+#manage-creations{
     background-image: url('/media/3127181.jpg');
     background-size: cover; 
     margin-top:2vh;

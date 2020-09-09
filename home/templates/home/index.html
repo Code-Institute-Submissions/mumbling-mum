@@ -7,10 +7,9 @@ The Mumbling Mum
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br>
-        <h1 class="text-center">The Mumbling Mum</h1></br>
-        <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6>
-        </br>
+        </br></br></br></br>
+        <h1 class="text-center">The Mumbling Mum</h1>
+        <h5 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h5>
         {% if user.is_authenticated %}
         <div class="row d-flex justify-content-center ">
             <p>You are logged in as {{ user }}</p>
@@ -26,8 +25,9 @@ The Mumbling Mum
                 </div>
             </div>
         </div>
+    </br> </br>
         {% endif %}
-        </br> </br>
+        
     </div>
 
 </div>

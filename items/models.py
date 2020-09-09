@@ -17,7 +17,7 @@ class Category(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=100)
     # e.g. 'Set of 2 Floral Fabric Baskets'
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)
     # referencing above Category model e.g. 'Fabric Baskets'
     description = models.TextField()
     # e.g.'Set of 2 stacking floral fabric baskets. Can be used for plants or for storing toiletries, hair accessories, or bits and bobs..
@@ -26,10 +26,14 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     # Option to add image as a jpg or a URL.  Image is not a required field.
-    star_rating = models.IntegerField(null=True, blank=True)
-    # future enhancement to add ability for members who have purchased the item to add a review
-    sku = models.CharField(max_length=254, null=True, blank=True)
-    # Added sku as may be required if the product line increases.
+    sku = models.CharField(max_length=254, null=True, blank=True, editable=False)
+    # SKU calculated by the category pk and item pk.
+    clearance = models.BooleanField(default=False, editable=False)
+    # Added to allow clearance items to maintain their category and SKU.
+    original_price = models.DecimalField(max_digits=6, decimal_places=2, editable=False, default=0)
+    # When item is flagged for clearance this will be populated with the original price. 
+    out_of_stock = models.BooleanField(default=False, editable=False)
+    # Admin can flag an item as out of stock
 
     def __str__(self):
         return self.name

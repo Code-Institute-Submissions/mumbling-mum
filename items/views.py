@@ -85,6 +85,7 @@ def edit_item(request, item_id):
 def delete_item(request, item_id):
     """ Delete an item from the store """
     item = get_object_or_404(Item, pk=item_id)
+    print(item)
     item.delete()
     return redirect(reverse('manage_items'))
 
@@ -107,18 +108,18 @@ def manage_items(request):
         return redirect(reverse('home'))
 
 @login_required
-def manage_items_by_category(request, cat):
+def manage_items_by_category(request, cat_id):
     """ A view to show items filtered by category """
     user= request.user
     if user.is_staff:
-        items = Item.objects.filter(category=cat)
+        items = Item.objects.filter(category=cat_id)
         categories = Category.objects.all()
         template = 'items/manage_items.html'
         filtered = True
         context = {
             'items': items,
             'categories': categories,
-            'cat': cat,
+            'cat_id': cat_id,
             'filtered' : filtered,
         }
         return render(request, template, context)

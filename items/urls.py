@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete_item/<int:item_id>/', views.delete_item, name='delete_item'),
     path('manage_items/', views.manage_items, name='manage_items'),
     path('manage_items_by_category/', views.manage_items_by_category, name='manage_items_by_category'),
+    path('manage_categories/', views.manage_categories, name='manage_categories'),
 ]

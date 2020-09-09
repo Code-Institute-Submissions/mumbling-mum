@@ -11,7 +11,7 @@ def all_items(request):
         'items': items,
         'categories': categories,
     }
-    return render(request, 'items/items.html', context)
+    return render(request,'items/items.html', context)
 
 def items_by_category(request, cat):
     """ A view to show items filtered by category """
@@ -40,20 +40,21 @@ def add_item(request):
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            item=form.save()
             # Create SKU
             sku1 = str(item.category.pk*10)
             sku2 = str(item.pk*10)
             sku = sku1 + sku2
             print(sku)
             Item.objects.filter(pk=item.pk).update(sku=sku)
-            return redirect(reverse('items'))
+            return redirect(reverse('manage_items'))
     else:
         form = ItemForm()
         context = {
             'form':form,
         }
-        return render(request, 'items/add_item.html', context)
+        template = 'items/add_item.html'
+        return render(request, template, context)
 
 @login_required
 def edit_item(request, item_id):
@@ -70,7 +71,7 @@ def edit_item(request, item_id):
             sku = sku1 + sku2
             print(sku)
             Item.objects.filter(pk=item.pk).update(sku=sku)
-            return redirect(reverse('items'))
+            return redirect(reverse('manage_items'))
 
     else:
         form = ItemForm(instance=item)
@@ -125,3 +126,35 @@ def manage_items_by_category(request, cat):
         # redirect to home page only Staff can view tha manage items page
         return redirect(reverse('home'))
 
+login_required
+def manage_categories(request):
+    """ A view to show items filtered by category """
+    user= request.user
+    if user.is_staff:
+        categories = Category.objects.all()
+        template = 'items/manage_categories.html'
+        context = {
+            'categories': categories,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+@login_required
+def add_category(request):
+    """ A view to allow staff to add a new item to the store """
+    context = {}
+    return render(request, 'items/manage_categories.html', context)
+
+@login_required
+def edit_category(request, item_id):
+    """ A view to allow staff to edit an item to the store """
+    context = {}
+    return render(request, 'items/manage_categories.html', context)
+
+@login_required
+def delete_category(request, item_id):
+    """ Delete an item from the store """
+    context = {}
+    return render(request, 'items/manage_categories.html', context)

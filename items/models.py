@@ -17,7 +17,7 @@ class Category(models.Model):
 class Item(models.Model):
     name = models.CharField(max_length=100)
     # e.g. 'Set of 2 Floral Fabric Baskets'
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)
     # referencing above Category model e.g. 'Fabric Baskets'
     description = models.TextField()
     # e.g.'Set of 2 stacking floral fabric baskets. Can be used for plants or for storing toiletries, hair accessories, or bits and bobs..

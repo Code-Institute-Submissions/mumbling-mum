@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import Item, Category
 from django.contrib.auth.decorators import login_required
-from .forms import ItemForm
+from .forms import ItemForm, CategoryForm
 
 def all_items(request):
     """ A view to show all items """
@@ -144,17 +144,16 @@ def manage_categories(request):
 @login_required
 def add_category(request):
     """ A view to allow staff to add a new item to the store """
-    context = {}
-    return render(request, 'items/manage_categories.html', context)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('manage_categories'))
+    else:
+        form = CategoryForm()
+        context = {
+            'form':form,
+        }
+        template = 'items/add_category.html'
+        return render(request, template, context)
 
-@login_required
-def edit_category(request, item_id):
-    """ A view to allow staff to edit an item to the store """
-    context = {}
-    return render(request, 'items/manage_categories.html', context)
-
-@login_required
-def delete_category(request, item_id):
-    """ Delete an item from the store """
-    context = {}
-    return render(request, 'items/manage_categories.html', context)

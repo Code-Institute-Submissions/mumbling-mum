@@ -41,7 +41,6 @@ class Order(models.Model):
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         # Aggregate - the value of multiple rows is grouped together to form a single summary value.
         self.delivery_cost = settings.STANDARD_DELIVERY_COST
-        # self.grand_total = 1 + self.delivery_cost
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
 

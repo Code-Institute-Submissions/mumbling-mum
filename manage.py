@@ -7,7 +7,9 @@ import dotenv
 
 
 def main():
-    dotenv.read_dotenv()
+    if 'DEVELOPMENT' in os.environ:
+        dotenv.read_dotenv()
+        
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mumbling_mum.settings')
     try:

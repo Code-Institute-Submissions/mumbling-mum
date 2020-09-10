@@ -7,41 +7,61 @@ The Mumbling Mum
 {% block header %}
 <div class="row">
     <div class="col-4 inline-block text-center">
-    </br>
+        </br>
         <img id="me" src="{% static 'images/me.jpg' %}">
-    </br>
+        </br>
     </div>
     <div class="col-8">
         </br></br></br></br>
         <h1>Mum Mumblings</h1></br>
         <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
-        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. This is my blog where I like to share funny stories and what we have been up to. Enjoy!</h5>
-    </br>
+        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. This is my blog where I like to share
+            funny stories and what we have been up to. Enjoy!</h5>
+        </br>
+    </div>
 </div>
 {% endblock %}
 
 {% block content %}
-
- 
+<div class="container">
+    </br>
+    <div class="row justify-content-center">
+        </br></br>
+        <div class="col-4">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-filter"></i>
+                    Blog Categories
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'blog_list' %}">All Entries</a>
+                    {% for c in object_list.category %}
+                    <a class="dropdown-item" href="{% url 'blog_list_by_category' c.pk %}">{{c.display_name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% for entry in object_list %}
-<div class="row">
-    <div class="col">
-        <h4>{{ entry.title }}</h4>
-        <p>{{ entry.author }}</p>
-        <p>{{ entry.body }}</p>
+    <div class="row">
+        <div class="col">
+            <h4>{{ entry.title }}</h4>
+            <p>{{ entry.category }}</p>
+            <p>{{ entry.author }}</p>
+            <p>{{ entry.body }}</p>
+        </div>
+        <div class="col-sm-3">
+            {% if entry.image %}
+            <img class="img-thumbnail" src="{{ entry.image}}">
+            {% elif entry.image_url %}
+            <img class="img-thumbnail" src="{{ entry.image_url}}">
+            {% else %}
+            <img class="img-thumbnail" src="{% static 'images/mumble.jpg'%}">
+            {% endif %}
+        </div>
     </div>
-    <div class="col-sm-3">
-        {% if entry.image %}
-        <img class="img-thumbnail" src="{{ entry.image}}" >
-        {% elif entry.image_url %}
-        <img class="img-thumbnail" src="{{ entry.image_url}}" >
-        {% else %}
-        <p> NO IMAGE </p>
-        {% endif %}
-    </div>
-
-</div>
+    <hr>
     {% endfor %}
-</ul>
-    
+</div>
 {% endblock %}

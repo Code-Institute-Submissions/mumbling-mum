@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block title %}
 The Mumbling Mum
 {% endblock %}
@@ -43,11 +44,11 @@ The Mumbling Mum
             </div>
         </div>
     </div>
-    {% for entry in object_list %}
+    {% for entry in blogentries %}
     <div class="row">
         <div class="col">
             <h4>{{ entry.title }}</h4>
-            <p>{{ entry.category }}</p>
+            <p>Category {{ entry.category }}</p>
             <p>{{ entry.author }}</p>
             <p>{{ entry.body }}</p>
         </div>
@@ -60,6 +61,15 @@ The Mumbling Mum
             <img class="img-thumbnail" src="{% static 'images/mumble.jpg'%}">
             {% endif %}
         </div>
+    </div>
+    <div class="row">
+        <form action="{% url 'like_entry' entry.pk %}" method="POST">
+            {% csrf_token%}
+            <button type="submit" class="btn btn-secondary btn-sm" name="blogentry_id" value="{{entry.id}}">
+                Like
+            </button>
+        </form>
+        Likes: {{ entry.likes.count }}
     </div>
     <hr>
     {% endfor %}

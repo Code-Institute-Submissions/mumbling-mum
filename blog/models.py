@@ -26,18 +26,19 @@ class BlogEntry(models.Model):
     image = models.ImageField(null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     # Option to add image as a jpg or a URL.  Image is not a required field.
+    likes = models.ManyToManyField(User, related_name='blog_entry')
+    # logs which users have liked the post
+    
+    def total_likes(self):
+        # calculates likes for each blog entry 
+        return self.likes.count()
+
 
     def __str__(self):
         return self.title + '|' +  str(self.author)
     
-class Comments(models.Model):
+class Comment(models.Model):
     blog_entry = models.ForeignKey('BlogEntry', null=True, blank=True, on_delete=models.SET_NULL)
     author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='blog_comments')
     body = models.TextField()
 
-class Likes(models.Model):
-    blog_entry = models.ForeignKey('BlogEntry', null=True, blank=True, on_delete=models.SET_NULL)
-    author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='blog_likes')
-
-
-    

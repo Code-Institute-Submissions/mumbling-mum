@@ -6,24 +6,17 @@ The Mumbling Mum
 {% endblock %}
 {% block header %}
 <div class="row">
-    <div class="col-12">
-        </br>
-        <h1 class="text-center">Mum Mumblings</h1></br>
-        <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6>
-        
+    <div class="col-4 inline-block text-center">
     </br>
-    <div class="row">
-        <div class="col-4 inline-block text-center">
-            <img id="me" src="/media/me.jpg">
-        </div>
-        <div class="col-8 inline-block">
-            </br>
-            <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.....</h5>
-        </div>
+        <img id="me" src="{% static 'images/me.jpg' %}">
+    </br>
     </div>
-        </br> </br>
-    </div>
-
+    <div class="col-8">
+        </br></br></br></br>
+        <h1>Mum Mumblings</h1></br>
+        <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
+        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. This is my blog where I like to share funny stories and what we have been up to. Enjoy!</h5>
+    </br>
 </div>
 {% endblock %}
 

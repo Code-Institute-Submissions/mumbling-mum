@@ -18,14 +18,14 @@ The Mumbling Mum
         <div class="d-none d-sm-block">
             <div class="row d-flex justify-content-center ">
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a href="#" class="btn btn-secondary center-block">login</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-secondary center-block">login</a>
                 </div>
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a href="#" class="btn btn-secondary center-block">Register</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-secondary center-block">Register</a>
                 </div>
             </div>
         </div>
-    </br> </br>
+    </br>
         {% endif %}
         
     </div>
@@ -38,11 +38,11 @@ The Mumbling Mum
     <div class="col-sm-6">
         <div id="home_blog_div">
             </br>
-            <h2 class="text-center">Mum Mumblings</h2>
+            <a class="text-dark" href="{% url 'blog_list' %}"><h2 class="text-center">Mum Mumblings</h2></a>
             </br>
             <div class="row">
                 <div class="col-6 inline-block text-center">
-                    <img id="me" src="static/me1.jpg">
+                    <img id="me" src="{% static 'images/me.jpg' %}">
                 </div>
                 <div class="col-6 inline-block">
                     </br>
@@ -54,11 +54,11 @@ The Mumbling Mum
     <div class="col-sm-6">
         <div id="home_shop_div">
             </br>
-            <h2 class="text-center">Mumbling Creations</h2>
+            <a class="text-dark" href="{% url 'items' %}"><h2 class="text-center">Mumbling Creations</h2></a>
             </br>
-            <h6 class="text-center">Handmade Textile Gifts and Accessories</h6>
+            <h4 class="text-center">Handmade Textile Gifts and Accessories</h4>
             </br>
-            <h3 class="text-center">COMING SOON!</h3>
+           
         </div>
     </div>
 </div>

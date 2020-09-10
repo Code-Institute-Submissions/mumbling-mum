@@ -10,23 +10,6 @@ from django.dispatch import receiver
 from .models import MemberProfile
 from .forms import MemberProfileForm
 
-
-
-# @receiver(user_signed_up)
-# def create_member_profile(sender=User, **kwargs):
-#     print('User signed up!!!')
-#     MemberProfile.objects.create(
-#     user = User.objects.get(username=User.username),
-#     default_phone_number = '',
-#     default_street_address1 = '',
-#     default_street_address2 = '',
-#     default_town_or_city = '',
-#     default_county = '',
-#     default_postcode = '',
-#     default_country = '',
-#     )
-    
-
 @login_required
 def member_profile(request):
     """ View to display the members Profile information """

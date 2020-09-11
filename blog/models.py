@@ -18,7 +18,7 @@ class BlogEntry(models.Model):
     # e.g. 'Code BROWN'
     category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)
     # e.g. 'Poo Stories'
-    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False)
+    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False, default='')
     # author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_entries',editable=False)
     # Included for future if there are additional blog authors
     post_date = models.DateField(auto_now_add=True)
@@ -27,7 +27,7 @@ class BlogEntry(models.Model):
     image = models.ImageField(null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     # Option to add image as a jpg or a URL.  Image is not a required field.
-    likes = models.ManyToManyField(User, related_name='blog_entry', editable=False)
+    likes = models.ManyToManyField(User, related_name='blog_entry', editable=False, default='')
     # logs which users have liked the post
     
     def total_likes(self):
@@ -40,7 +40,7 @@ class BlogEntry(models.Model):
     
 class Comment(models.Model):
     blog_entry = models.ForeignKey('BlogEntry', null=True, blank=False, on_delete=models.SET_NULL, editable=False)
-    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False)
+    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False, default='')
     # author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_comments', editable=False)
     body = models.TextField()
     post_date = models.DateField(auto_now_add=True)

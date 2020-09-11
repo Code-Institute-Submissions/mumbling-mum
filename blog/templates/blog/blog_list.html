@@ -15,8 +15,8 @@ The Mumbling Mum
     <div class="col-8">
         </br></br></br></br>
         <h1>Mum Mumblings</h1></br>
-        <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
-        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. This is my blog where I like to share
+        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. 
+            This is my blog where I like to share
             funny stories and what we have been up to. Enjoy!</h5>
         </br>
     </div>
@@ -25,19 +25,38 @@ The Mumbling Mum
 
 {% block content %}
 <div class="container">
-    {% if manage_blog %}
-    <div class="row">
+
+    </br>
+    <div class="row justify-content-center">
+        </br></br>
+        {% if manage_blog %}
+        <div class="col-4">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-filter"></i>
+                    Blog Categories
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'manage_blog' %}">All Entries</a>
+                    {% for c in categories %}
+                    <a class="dropdown-item" href="{% url 'manage_blog_by_category' c.pk %}">{{c.name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
         </br></br>
         <div class="col-4">
             <a class="btn btn-secondary" type="button" href="{% url 'add_blog_entry' %}">
                 <i class="fa fa-plus"></i> Add New Blog Post
             </a>
         </div>
-    </div>
-    {% endif %}
-    </br>
-    <div class="row justify-content-center">
-        </br></br>
+        <div class="col-4">
+            <a class="btn btn-secondary" type="button" href="{% url 'manage_categories' %}">
+                <i class="fa fa-list"></i> Manage Blog Categories
+            </a>
+        </div>
+        {% else %}
         <div class="col-4">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -47,12 +66,13 @@ The Mumbling Mum
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{% url 'blog_list' %}">All Entries</a>
-                    {% for c in object_list.category %}
-                    <a class="dropdown-item" href="{% url 'blog_list_by_category' c.pk %}">{{c.display_name}}</a>
+                    {% for c in categories %}
+                    <a class="dropdown-item" href="{% url 'blog_list_by_category' c.pk %}">{{c.name}}</a>
                     {% endfor %}
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
     <hr>
     {% for entry in blogentries %}

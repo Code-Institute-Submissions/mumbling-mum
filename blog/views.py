@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import BlogEntry, Category, Comment
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import BlogEntryForm
+from .forms import BlogEntryForm, CategoryForm
 
 
 def blog_list(request):
@@ -16,6 +16,20 @@ def blog_list(request):
     }
     template_name = 'blog/blog_list.html'
     return render(request, template_name, context)
+
+def blog_list_by_category(request, cat_id):
+    """ A view to blog entries filtered by category """
+    blogentries = BlogEntry.objects.filter(category=cat_id)
+    categories = Category.objects.all()
+    filtered = True
+    context = {
+        'blogentries': blogentries,
+        'categories': categories,
+        'cat_id': cat_id,
+        'filtered' : filtered,
+    }
+    template = 'blog/blog_list.html'
+    return render(request, template, context)
 
 @login_required
 def like_entry(request, blogentry_id):
@@ -88,6 +102,26 @@ def manage_blog(request):
         # redirect to home page only Staff can view tha manage blog page
         return redirect(reverse('home'))
 
+
+@login_required
+def manage_blog_by_category(request, cat_id):
+    """ A view to blog entries filtered by category """
+    user= request.user
+    if user.is_staff:
+        manage_blog = True
+        blogentries = BlogEntry.objects.filter(category=cat_id)
+        categories = Category.objects.all()
+        filtered = True
+        context = {
+            'blogentries': blogentries,
+            'categories': categories,
+            'cat_id': cat_id,
+            'filtered' : filtered,
+            'manage_blog':manage_blog,
+        }
+        template = 'blog/blog_list.html'
+        return render(request, template, context)
+
 @login_required
 def edit_blog_entry(request, blogentry_id):
     """ A View to allow staff member to edit blog entries """
@@ -117,3 +151,62 @@ def delete_blog_entry(request, blogentry_id):
     blogentry = get_object_or_404(BlogEntry, pk=blogentry_id)
     blogentry.delete()
     return redirect(reverse('manage_blog'))
+
+@login_required
+def manage_categories(request):
+    """ A view to add, modify and delete categories """
+    user= request.user
+    if user.is_staff:
+        categories = Category.objects.all()
+        template = 'blog/manage_categories.html'
+        context = {
+            'categories': categories,
+        }
+        return render(request, template, context)
+    else:
+        # redirect to home page only Staff can view tha manage items page
+        return redirect(reverse('home'))
+
+@login_required
+def add_category(request):
+    """ A view to allow staff to add a new item to the store """
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('manage_categories'))
+    else:
+        form = CategoryForm()
+        context = {
+            'form':form,
+        }
+        template = 'blog/add_category.html'
+        return render(request, template, context)
+
+@login_required
+def edit_category(request, cat_id):
+    """ A view to allow staff to edit an item to the store """
+    print(cat_id)
+    category = get_object_or_404(Category, pk=cat_id)
+    print(category)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST or None, request.FILES or None, instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('manage_categories'))
+
+    else:
+        form = CategoryForm(instance=category)
+        context = {
+            'form':form,
+            'category' : category,
+        }
+        return render(request, 'blog/edit_category.html', context)
+
+@login_required
+def delete_category(request, cat_id):
+    """ Delete an item from the store """
+    category = get_object_or_404(Category, pk=cat_id)
+    category.delete()
+    return redirect(reverse('manage_categories'))
+

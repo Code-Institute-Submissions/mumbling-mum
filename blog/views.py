@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import BlogEntry, Category, Comment
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import BlogEntryForm, CategoryForm
+from .forms import BlogEntryForm, CategoryForm, CommentForm
 
 
 def blog_list(request):
@@ -49,6 +49,9 @@ def blog_detail(request, blogentry_id):
     """ A view to show individual item details """ 
     blogentry = get_object_or_404(BlogEntry, pk=blogentry_id)
     categories = Category.objects.all()
+    comments = Comment.objects.filter(blog_entry=blogentry_id)
+    form = CommentForm()
+    user = request.user
     liked = False
     if blogentry.likes.filter(id=request.user.id).exists():
         liked = True
@@ -57,7 +60,10 @@ def blog_detail(request, blogentry_id):
     context = {
         'blogentry' : blogentry,
         'categories': categories,
-        'liked': liked
+        'liked': liked,
+        'comments': comments,
+        'form':form,
+        'user':user,
     }
     template_name = 'blog/blog_detail.html'
     return render(request, template_name, context)
@@ -81,6 +87,23 @@ def add_blog_entry(request):
             return render(request, template, context)
     else:
         return render(reverse('blog_list'))
+
+@login_required
+def add_comment(request, blogentry_id):
+    user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment=form.save()
+            Comment.objects.filter(pk=comment.pk).update(blog_entry=blogentry_id)
+            Comment.objects.filter(pk=comment.pk).update(author=user)
+            return redirect(reverse('blog_detail', args=[blogentry_id] ))
+
+@login_required
+def delete_comment(request, blogentry_id, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect(reverse('blog_detail', args=[blogentry_id] ))
 
 @login_required
 def manage_blog(request):

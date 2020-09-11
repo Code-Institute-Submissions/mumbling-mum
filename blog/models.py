@@ -18,7 +18,8 @@ class BlogEntry(models.Model):
     # e.g. 'Code BROWN'
     category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)
     # e.g. 'Poo Stories'
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_entries',editable=False)
+    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False)
+    # author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_entries',editable=False)
     # Included for future if there are additional blog authors
     post_date = models.DateField(auto_now_add=True)
     body = models.TextField()
@@ -38,7 +39,9 @@ class BlogEntry(models.Model):
         return self.title + '|' +  str(self.author)
     
 class Comment(models.Model):
-    blog_entry = models.ForeignKey('BlogEntry', null=True, blank=True, on_delete=models.SET_NULL)
-    author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='blog_comments')
+    blog_entry = models.ForeignKey('BlogEntry', null=True, blank=False, on_delete=models.SET_NULL, editable=False)
+    author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False)
+    # author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_comments', editable=False)
     body = models.TextField()
+    post_date = models.DateField(auto_now_add=True)
 

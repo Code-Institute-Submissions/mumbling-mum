@@ -11,7 +11,7 @@ class BlogEntryForm(forms.ModelForm):
         model=BlogEntry
         fields='__all__' #include all thefields
 
-class Comment(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     class Meta:
         model=Comment
         fields='__all__' #include all thefields

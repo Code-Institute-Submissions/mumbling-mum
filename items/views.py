@@ -127,7 +127,7 @@ def manage_items_by_category(request, cat_id):
         # redirect to home page only Staff can view tha manage items page
         return redirect(reverse('home'))
 
-login_required
+@login_required
 def manage_categories(request):
     """ A view to show items filtered by category """
     user= request.user

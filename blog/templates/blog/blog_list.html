@@ -44,15 +44,18 @@ The Mumbling Mum
             </div>
         </div>
     </div>
+    <hr>
     {% for entry in blogentries %}
     <div class="row">
-        <div class="col">
-            <h4>{{ entry.title }}</h4>
-            <p>Category {{ entry.category }}</p>
-            <p>{{ entry.author }}</p>
-            <p>{{ entry.body }}</p>
+        <div class="col-sm-10">
+            <a href="{% url 'blog_detail' entry.pk %}">
+                <h4>{{ entry.title }}</h4>
+            </a>
+            <p><small>Category: {{ entry.category }}</small></p>
+            <p><small>Author: {{ entry.author }}</small></p>
+            <p>{{ entry.body|slice:":100"|safe }}</p>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             {% if entry.image %}
             <img class="img-thumbnail" src="{{ entry.image}}">
             {% elif entry.image_url %}
@@ -63,15 +66,15 @@ The Mumbling Mum
         </div>
     </div>
     <div class="row">
-        <form action="{% url 'like_entry' entry.pk %}" method="POST">
-            {% csrf_token%}
-            <button type="submit" class="btn btn-secondary btn-sm" name="blogentry_id" value="{{entry.id}}">
-                Like
-            </button>
-        </form>
-        Likes: {{ entry.likes.count }}
+        <div class="col">
+            <i class="far fa-thumbs-up"></i> {{ entry.likes.count }}
+        </div>
+        <div class="col">
+            Comments 
+        </div>
     </div>
-    <hr>
-    {% endfor %}
+<hr>
+
+{% endfor %}
 </div>
 {% endblock %}

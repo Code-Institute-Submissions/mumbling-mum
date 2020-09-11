@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+The Mumbling Mum
+{% endblock %}
+{% block header %}
+<div class="row justify-content-center">
+    <div class="col center-text">
+        </br></br></br></br>
+        <h1>Mum Mumblings</h1></br>
+        <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
+        <h2>{{blogentry.title}}</h2>
+        </br>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    </br>
+    <div class="row">
+        </br></br>
+        <div class="col-4">
+            <a class="btn btn-secondary" type="button" href="{% url 'blog_list' %}">
+                <i class="fas fa-angle-left"></i> Back
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <h4>{{ blogentry.title }}</h4>
+            <small>Category: {{ blogentry.category }}</small>
+            <p>{{ blogentry.body }}</p>
+        </div>
+        <div class="col-sm-3">
+            {% if blogentry.image %}
+            <img class="img-thumbnail" src="{{ blogentry.image}}">
+            {% elif blogentry.image_url %}
+            <img class="img-thumbnail" src="{{ blogentry.image_url}}">
+            {% else %}
+            <img class="img-thumbnail" src="{% static 'images/mumble.jpg'%}">
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <!-- Likes -->
+        <div class="col-md-3">
+            <h6>Likes: {{ blogentry.likes.count }}</h6>
+            {% if liked %}
+            <form action="{% url 'like_entry' blogentry.pk %}" method="POST">
+                {% csrf_token%}
+                <button type="submit" class="btn btn-primary btn-sm" name="blogentry_id" value="{{entry.id}}">
+                    <i class="fas fa-thumbs-up"></i>
+                </button>
+            </form>
+            {% else %}
+            <form action="{% url 'like_entry' blogentry.pk %}" method="POST">
+                {% csrf_token%}
+                <button type="submit" class="btn btn-secondary btn-sm" name="blogentry_id" value="{{entry.id}}">
+                    <i class="far fa-thumbs-up"></i>
+                </button>
+            </form>
+            {% endif %}
+        </div>
+        <!-- Comments -->
+        <div class="col-md-9">
+            <h6>Comments {{ comments.count }}</h6>
+            <button type="submit" class="btn btn-secondary btn-sm" name="add_comment">
+                Add Comment                
+            </button>
+        </div>
+    </div>
+    <hr>
+</div>
+{% endblock %}

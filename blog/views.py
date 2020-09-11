@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from .models import BlogEntry, Category, Comment
 from django.http import HttpResponseRedirect
+from .forms import BlogEntryForm
 
 
 def blog_list(request):
@@ -45,3 +46,22 @@ def blog_detail(request, blogentry_id):
     }
     template_name = 'blog/blog_detail.html'
     return render(request, template_name, context)
+
+def add_blog_entry(request):
+    user = request.user
+    if user.is_staff:
+        if request.method == 'POST':
+            form = BlogEntryForm(request.POST, request.FILES)
+            if form.is_valid():
+                blogentry=form.save()
+                BlogEntry.objects.filter(pk=blogentry.pk).update(author=user)
+                return redirect(reverse('blog_detail', args=[blogentry.pk] ))
+        else:
+            form = BlogEntryForm()
+            context = {
+                'form':form,
+            }
+            template = 'blog/add_blog_entry.html'
+            return render(request, template, context)
+    else:
+        return render(reverse('blog_list'))

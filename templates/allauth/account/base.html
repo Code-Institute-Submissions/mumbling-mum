@@ -1,1 +1,17 @@
 {% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <div class="authorization-pgs">
+        </br>
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                {% block inner_content %}
+                {% endblock %}
+            </div>
+        </div>
+        </br>
+    </div>
+</div>
+{% endblock %}

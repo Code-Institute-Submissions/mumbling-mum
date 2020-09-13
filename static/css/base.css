@@ -12,7 +12,19 @@
         background-size: cover;
     }
 }
+/* ---AUTHORIZATION PAGES--- */
+/* .auth-header {
+    background-image: url('/media/3127133_cropped.jpg');
+    background-size: cover;
+} */
 
+.authorization-pgs {
+    background-image: url('/media/3127133_rotated.jpg');
+    background-size: cover;
+    min-height:65vh;
+}
+
+/* ---END OF AUTHORIZATION PAGES--- */
 /* -------HOMEPAGE------- */
 /* ----Intro Section */
 #me {

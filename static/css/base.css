@@ -15,7 +15,7 @@
 /* ---AUTHORIZATION PAGES--- */
 
 .authorization-pgs {
-    background-image: url('/static/3127133_rotated.jpg');
+    background-image: url('/static/images/3127133_rotated.jpg');
     background-size: cover;
     min-height:65vh;
 }
@@ -30,7 +30,7 @@
 }
 
 #intro {
-    background-image: url('/static/intro-background.jpg'); 
+    background-image: url('/static/images/intro-background.jpg'); 
     background-size: cover; 
     margin-top:2vh;
     padding: 2vh; 

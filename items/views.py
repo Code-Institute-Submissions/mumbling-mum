@@ -74,6 +74,8 @@ def edit_item(request, item_id):
             return redirect(reverse('manage_items'))
 
     else:
+        price = item.price
+        Item.objects.filter(pk=item.pk).update(original_price = price)
         form = ItemForm(instance=item)
         context = {
             'form':form,
@@ -184,3 +186,12 @@ def delete_category(request, cat_id):
     category = get_object_or_404(Category, pk=cat_id)
     category.delete()
     return redirect(reverse('manage_categories'))
+
+def stock_status(request, item_id):
+    """ A View to change the stock status """
+    item = get_object_or_404(Item, pk=item_id)
+    if item.out_of_stock:
+        Item.objects.filter(pk=item_id).update(out_of_stock = False)
+    else:
+        Item.objects.filter(pk=item_id).update(out_of_stock = True)
+    return redirect(reverse('manage_items'))

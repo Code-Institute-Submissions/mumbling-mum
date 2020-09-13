@@ -9,57 +9,83 @@ The Mumbling Mum
     <div class="col-12">
         </br></br></br></br>
         <h1 class="text-center">The Mumbling Mum</h1>
-        <h5 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h5>
+        <h5 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since
+            2016.</h5>
         {% if user.is_authenticated %}
         <div class="row d-flex justify-content-center ">
-            <p>You are logged in as {{ user }}</p>
+            <h6>You are logged in as {{ user }}</h6>
         </div>
         {% else %}
         <div class="d-none d-sm-block">
             <div class="row d-flex justify-content-center ">
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a href="{% url 'account_login' %}" class="btn btn-secondary center-block">login</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-secondary border-dark center-block">login</a>
                 </div>
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a href="{% url 'account_signup' %}" class="btn btn-secondary center-block">Register</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-secondary border-dark center-block">Register</a>
                 </div>
             </div>
         </div>
-    </br>
+        </br>
         {% endif %}
-        
+
     </div>
 
 </div>
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+{% else %}
+<!-- Intro section only displayed when not logged in -->
+<div class="container">    
+    <div id="intro" class="row">
+        <div class="col-4 inline-block text-center">
+            <img id="me" src="{% static 'images/me.jpg' %}">
+        </div>
+        </br>
+        <div class="col-8 inline-block">
+            </br>
+            <h5>Hi, I'm Mel (aka The Mumbling Mum). Welcome to my site,
+                where you can view and purchase some of my creations and read my 'mumblings',
+                where I like to share funny stories and what I have have been up to with my boys. Enjoy!</h5>
+        </div>
+    </div>
+</div>
+{% endif %}
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6 inline-block">
         <div id="home_blog_div">
             </br>
-            <a class="text-dark" href="{% url 'blog_list' %}"><h2 class="text-center">Mum Mumblings</h2></a>
+            <a class="text-dark" href="{% url 'blog_list' %}">
+                <h2 class="text-center">Mum Mumblings</h2>
+            </a>
             </br>
-            <div class="row">
-                <div class="col-6 inline-block text-center">
-                    <img id="me" src="{% static 'images/me.jpg' %}">
-                </div>
-                <div class="col-6 inline-block">
-                    </br>
-                    <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.....</h5>
-                </div>
+            <h4 class="text-center">Catch up on the latest Mumbles!</h4>
+            </br>
+            <!-- Add visit blg button -->
+            <div class="center">
+                <a href="{% url 'blog_list' %}" class="btn btn-lg btn-secondary border-dark">Visit Blog pages</a>
             </div>
+        </br></br>
         </div>
     </div>
     <div class="col-sm-6">
         <div id="home_shop_div">
             </br>
-            <a class="text-dark" href="{% url 'items' %}"><h2 class="text-center">Mumbling Creations</h2></a>
+            <a class="text-dark" href="{% url 'items' %}">
+                <h2 class="text-center">Mumbling Creations</h2>
+            </a>
             </br>
             <h4 class="text-center">Handmade Textile Gifts and Accessories</h4>
             </br>
-           
+            <!-- Add visit store button -->
+            <div class="center">
+                <a href="{% url 'items' %}" class="btn btn-lg btn-secondary border-dark">Visit Store</a>
+            </div>
+        </br></br>
         </div>
     </div>
 </div>
+
 {% endblock %}

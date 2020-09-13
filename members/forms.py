@@ -9,7 +9,7 @@ class MemberProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Add placeholders and classes, remove auto-generated
+        Add placeholders and edit auto-generated
         labels and set autofocus on first field
         """
         super().__init__(*args, **kwargs)
@@ -22,13 +22,14 @@ class MemberProfileForm(forms.ModelForm):
             'default_county': 'County',
         }
 
+        # Update Form labels
+        self.fields['default_phone_number'].label = 'Phone Number'
+        self.fields['default_postcode'].label = 'Postal Code'
+        self.fields['default_town_or_city'].label = 'Town or City'
+        self.fields['default_street_address1'].label = 'Street Address 1'
+        self.fields['default_street_address2'].label = 'Street Address 2'
+        self.fields['default_county'].label = 'County'
+
+        # Set Auto focus on Phone Number
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
-        for field in self.fields:
-            if field != 'default_country':
-                if self.fields[field].required:
-                    placeholder = f'{placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-            # self.fields[field].widget.attrs['class'] = 'border-black rounded-0 profile-form-input'
-            self.fields[field].label = False
+      

@@ -7,10 +7,10 @@ The Mumbling Mum
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br>
-        <h1 class="text-center">My Member Profile</h1></br>
+        </br></br></br>
+        <h1 class="text-center">My Member Profile</h1>
         <div class="row d-flex justify-content-center ">
-            <p>You are logged in as {{ user }}</p>
+            <h5>You are logged in as {{ user }}</h5>
         </div>
         </br>
     </div>
@@ -21,49 +21,41 @@ The Mumbling Mum
 
 {% block content %}
 <!-- Add Default profile info and button to edit -->
-<div class="row">
-    <div class="col-6">
+<div class="row justify-content-center">
+    <div class="col-sm-4 justify-content-center">
     </br>
-        <h4>Default Delivery Information</h4>
-    </div>
-    </br>
+    <h4>My Previous Orders</h4>
+    <hr>
+    <table>
+        <tr>
+            <th>Order Number</th>
+            <th>&nbsp &nbsp &nbsp &nbsp</th>
+            <th>Order Date</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td><a href="{% url 'order_detail' order.pk %}">{{order.order_no|slice:":10"|safe }}..</a></td>
+            <td>&nbsp &nbsp &nbsp &nbsp</td>
+            <td>{{order.date}}</td>
+        </tr>
+        
+        {% endfor %}
+    </table>
 </div>
-<div class="row">
-    <div class="col-6">
+    <div class="col-sm-4">
+        </br>
+        <h4>My Delivery Information</h4>
+        
+        <hr>
         <form action="{% url 'member_profile' %}" method="POST" id="profile-update-form">
             {% csrf_token %}
             {{ form|crispy }}
-            <button class="btn btn-secondary">Update Information</button>
+            <button class="btn btn-light border-dark">Update Information</button>
         </form>
     </div>
+    
 </div>
-<!-- Add 'My previous orders'  -->
 
-    <div class="row">
-        <div class="col-6">
-        </br>
-            <h4>My Previous Orders</h4>
-        </div>
-        </br>
-    </div>
-    {{orders}}
-    <div class="row">
-        <div class="col-6">
-            <table>
-                <tr>
-                    <th>Order Number</th>
-                    <th>Order Date</th>
-                </tr>
-                {% for order in orders %}
-                <tr>
-                    <td>{{order.order_no}}</td>
-                    <td>{{order.date}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            
-        </div>
-    </div>
 
 <!-- if no orders display (There are no orders to display) -->
 

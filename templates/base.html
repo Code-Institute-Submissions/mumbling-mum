@@ -69,37 +69,33 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'items' %}">Creations</a>
                             </li>
-                            <li class="nav-item dropdown dropdown-menu-right">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My Account
-                                </a>
-                                {% if user.is_authenticated %}
-                                    {% if user.is_staff %}
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'admin_page' %}">Mumbling Admin</a>
-                                        <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
-                                        <!-- REMEMBER TO SORT ORDER PAGE -->
-                                        <a class="dropdown-item" href="#">My Orders</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
-                                    </div>
-                                    {% else %}
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
-                                        <!-- REMEMBER TO SORT ORDER PAGE -->
-                                        <a class="dropdown-item" href="#">My Orders</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
-                                    </div>
-                                    {% endif %}
+                            {% if user.is_authenticated %}
+                                <li class="nav-item dropdown dropdown-menu-right">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        My Account
+                                    </a>
+                                {% if user.is_staff %}
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{% url 'admin_page' %}">Mumbling Admin</a>
+                                            <a class="dropdown-item" href="{% url 'member_profile' %}">My info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                                        </div> 
+                                    </li>                      
                                 {% else %}
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
-                                    <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
-                                </div>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{% url 'member_profile' %}">My Profile</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
+                                    </div>
+                                </li>
                                 {% endif %}
-                            </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                                </li>
+                            {% endif %}
                             <li class="list-inline-item">
                                 <a class="nav-link" href="{% url 'view_shopping_bag' %}">
                                     <div class="text-center">

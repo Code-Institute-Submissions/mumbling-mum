@@ -37,6 +37,7 @@ The Mumbling Mum
 {% block content %}
 {% if user.is_authenticated %}
 {% else %}
+<!-- Intro section only displayed when not logged in -->
 <div class="container">    
     <div id="intro" class="row">
         <div class="col-4 inline-block text-center">

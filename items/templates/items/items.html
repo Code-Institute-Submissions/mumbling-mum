@@ -4,10 +4,11 @@
 {% block title %}
 Mumbling Creations
 {% endblock %}
+
 {% block header %}
 <div class="row">
   <div class="col-12">
-    </br>
+    </br></br></br>
     <h1 class="text-center">Mumbling Creations</h1></br>
     <h6 class="text-center">Handmade Textile Gifts and Accessories</h6>
     </br>
@@ -17,82 +18,59 @@ Mumbling Creations
 {% endblock %}
 
 {% block content %}
-</br>
-<div class="row">
-  </br></br>
-  <div class="col-12">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Select Category
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'items' %}">All Items</a>
-        {% for c in categories %}
-        <a class="dropdown-item" href="{% url 'items_by_category' c.pk %}">{{c.display_name}}</a>
-        {% endfor %}
+<div class="container">
+  </br>
+  <div class="row">
+    </br></br>
+    <div class="col-12 center">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Select Category
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'items' %}">All Items</a>
+          {% for c in categories %}
+          <a class="dropdown-item" href="{% url 'items_by_category' c.pk %}">{{c.display_name}}</a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-
-  <div class="col-12">
-    <div class="row">
-      {% for item in items %}
-      
-      <div class="col-sm-4 card">
-      <!-- <div class="card" style="width: 18rem;"> -->
-        {% if item.image %}
-        <a href="{% url 'item_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap"></a>
-        {% else %}
+  </br>
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        {% for item in items %}
+        <div class="col-sm-4 card">
+          {% if item.image %}
+          <a href="{% url 'item_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}"
+              alt="Card image cap"></a>
+          {% else %}
           <p> NO IMAGE </p>
-        {% endif %}
-        <div class="card-body">
-          <a href="{% url 'item_detail' item.pk %}"><h5 class="card-title">{{ item.name }}</h5></a>
-          <p class="card-text">{{ item.description|slice:":100"|safe }}....
-            <a href="{% url 'item_detail' item.pk %}">more</a>
-          </p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>£{{ item.price }}</strong></li>
-          <!-- Add rating here - Future feature -->
-        </ul>
-        <!-- If filtered by category don't show the category link-->
-        {% if filtered %}
-        {% else %}
-        <div class="card-body">
-          <p>Category: <a href="{% url 'items_by_category' item.category.pk %}" class="card-link">{{ item.category.display_name}}</a></p>
-          {% if user.is_staff %}
-          <p><a href="{% url 'edit_item' item.pk %}" class="card-link">Edit</a></p>
-          <!-- Button trigger delete modal -->      
-          <p><a data-toggle="modal" data-target="#deleteModal{{item.pk}}" class="card-link">Delete</a></p>
-          <!--  Modal -->
-          <div class="modal fade" id="deleteModal{{item.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">DELETE ITEM</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  Are you sure you want to delete {{ item.name }}?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  <a id="delete" href="{% url 'delete_item' item.pk %}"  class="btn btn-primary">Yes</a>
-                </div>
-              </div>
-            </div>
-          </div> 
+          {% endif %}
+          <div class="card-body">
+            <a href="{% url 'item_detail' item.pk %}">
+              <h5 class="card-title">{{ item.name }}</h5>
+            </a>
+            <p class="card-text">{{ item.description|slice:":100"|safe }}....
+              <a href="{% url 'item_detail' item.pk %}">more</a>
+            </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>£{{ item.price }}</strong></li>
+          </ul>
+          <!-- If filtered by category don't show the category link-->
+          {% if filtered %}
+          {% else %}
+          <div class="card-body">
+            <p>Category: <a href="{% url 'items_by_category' item.category.pk %}"
+                class="card-link">{{ item.category.display_name}}</a></p>
+          </div>
           {% endif %}
         </div>
-        {% endif %}
+        {% endfor %}
       </div>
-      
-      {% endfor %}
     </div>
   </div>
 </div>

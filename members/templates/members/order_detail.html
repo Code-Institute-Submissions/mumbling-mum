@@ -13,19 +13,13 @@ Thank You
 <div class="row">
     <div class="col-12">
         </br></br></br>
-        <h1 class="text-center">Thank You</h1></br>
+        <h1 class="text-center">Order Details</h1></br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 </br>
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <p>Your Order information is below. A confirmation will be sent to <strong> {{order.email}}</strong>.</p>
-        <hr>
-    </div>
-</div>
 <div class="row justify-content-center">
     <div class="col-md-6">
         <!-- order Summary -->
@@ -93,8 +87,8 @@ Thank You
             </div>
         </div>
         <hr>
-        <div class="row">
-            <!-- Add cta buttons here!! -->
+        <div class="row justify-content-center">
+            <a class="btn btn-light border-dark" href="{% url 'member_profile' %}"><i class="fas fa-chevron-left"></i> Back to My Info</a>
         </div>
     </div>
 </div>

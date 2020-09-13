@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import MemberProfile
 from .forms import MemberProfileForm
+from checkout.models import Order
 
 @login_required
 def member_profile(request):
@@ -59,6 +60,18 @@ def admin_page(request):
     else:
         # redirect to home page
         return redirect(reverse('home'))
+
+@login_required
+def order_detail(request, order_id):
+    """ A view to display the details of a precious order """
+    order= get_object_or_404(Order, pk=order_id)
+    template = 'members/order_detail.html'
+    context = {
+        'order': order,
+    }
+    return render(request, template, context)
+
+
 
 
 

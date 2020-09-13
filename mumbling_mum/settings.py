@@ -122,18 +122,20 @@ WSGI_APPLICATION = 'mumbling_mum.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # if running locally use sqlite3 else use postgres
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
+DATABASES = {
+    'default': dj_database_url.parse('postgres://kuejottchatphv:01574f63d3f69f8c14fb48b2f72ce847d949bd3d7cab531af86275b82687b780@ec2-52-48-65-240.eu-west-1.compute.amazonaws.com:5432/dc1fm2tcf5467e')
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

@@ -20,6 +20,14 @@ Mumbling Creations
 </br>
 
 <div class="row justify-content-center">
+    <!-- Item Image -->
+    <div class="col-sm-4">
+        {% if item.image %}
+        <img class="img-fluid" src="{{ item.image.url }}" alt="Card image cap">
+        {% else %}
+        <p> NO IMAGE </p>
+        {% endif %}
+    </div>
     <!-- Item details -->
     <div class="col-sm-4">
         <h2 class="card-title">{{ item.name }}</h2>
@@ -45,14 +53,6 @@ Mumbling Creations
             <button type="submit" class="btn btn-secondary border-dark"><i class="fas fa-shopping-bag"></i>  Add to Bag</button>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
-        {% endif %}
-    </div>
-    <!-- Item Image -->
-    <div class="col-sm-4">
-        {% if item.image %}
-        <img class="img-fluid" src="{{ item.image.url }}" alt="Card image cap">
-        {% else %}
-        <p> NO IMAGE </p>
         {% endif %}
     </div>
 

@@ -8,48 +8,42 @@ Shopping Bag
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br>
+        </br></br></br>
         <h1 class="text-center">My Shopping Bag</h1></br>
-        </br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
+<div class="container">
 <div class="row justify-content-center">
-    <div class="col-8 ">
+    <div class="col-sm-8 ">
         {% if shopping_bag_items %}
-        <div>
+        
             <table class="table">
                 <tr>
                     <th>Item</th>
-                    <th>Description</th>
                     <th>Price</th>
                     <th>Quantity</th>
-                    <th>Image</th>
                     <th>Sub Total</th>
                 </tr>
                 {% for bag_item in shopping_bag_items %}
                 <tr>
                     <td><a href="{% url 'item_detail' bag_item.item_id %}"><strong>{{bag_item.item.name}}</strong></a></td>
-                    <td>{{ bag_item.item.description|slice:":75"|safe }}....</td>
                     <td>£{{bag_item.item.price}}</td>
                     <td>
                         <form method="POST" action="{% url 'adjust_shopping_bag' bag_item.item_id %}">
                             {% csrf_token %}
                             <input type="number"  id="quantity" name="quantity" min="0" max="5" value = "{{bag_item.quantity}}">
                         </form>
-                        <a class="text-danger" href="{% url 'remove_from_shopping_bag' bag_item.item_id %}"><small>Remove</small></a>
+                        <a class="text-danger" href="{% url 'remove_from_shopping_bag' bag_item.item_id %}"><small><i class="fas fa-times"></i> Remove</small></a>
                     </td>
-                    <td><img class="img-thumbnail" src="{{bag_item.item.image.url}}"></img></td>
                     <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>
                 </tr>
 
                 {% endfor %}
 
                 <tr>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td><strong>Delivery Cost:</strong></td>
@@ -60,32 +54,30 @@ Shopping Bag
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
                     <td><strong>Grand Total: </strong></td>
                     <td>£{{ grand_total }}</td>
                 </tr>
             </table>
-
-        </div>
+            <div class="row justify-content-center">
+                <div class="col text-center">
+                    <a class="btn btn-secondary btn-light border-dark" href="{% url 'items' %}"><i class="fas fa-chevron-left"></i>   Keep Shopping</a>
+                </div>
+                <div class="col text-center">
+                    <a class="btn btn-secondary border-dark" href="{% url 'checkout' %}"><i class="fas fa-lock"></i> Checkout</a>
+                </div>
+            </div>
         {% else %}
         <div>
             <p>Your Shopping Bag is empty</p>
         </div>
+        <div class="col text-center">
+            <a class="btn btn-secondary btn-light border-dark" href="{% url 'items' %}"><i class="fas fa-chevron-left"></i>   Keep Shopping</a>
+        </div>
         {% endif %}
         <hr>
-        <div class="row justify-content-center">
-            <!-- <div class="col"></div> -->
-            <div class="col text-center">
-                <a class="btn btn-secondary" href="{% url 'items' %}">Keep Shopping</a>
-            </div>
-            <div class="col text-center">
-                <a class="btn btn-secondary" href="{% url 'checkout' %}">Checkout</a>
-            </div>
-        </div>
     </div>
 </div>
 </br>
-
+</div>
 
 {% endblock %}

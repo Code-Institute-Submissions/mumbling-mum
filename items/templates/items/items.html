@@ -24,8 +24,8 @@ Mumbling Creations
     </br></br>
     <div class="col-12 center">
       <div class="dropdown">
-        <button class="btn btn- dropdown-toggle border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn- dropdown-toggle border-dark" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Select Category
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -43,6 +43,16 @@ Mumbling Creations
       <div class="row">
         {% for item in items %}
         <div class="col-sm-4 card">
+          {% if item.out_of_stock %}
+          <div class="out-of-stock center">
+            <h4>OUT OF STOCK</h4>
+          </div>
+          {% endif %}
+          {% if item.clearance %}
+          <div class="clearance center">
+            <h4>CLEARANCE</h4>
+          </div>
+          {% endif %}
           {% if item.image %}
           <a href="{% url 'item_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}"
               alt="Card image cap"></a>
@@ -57,9 +67,16 @@ Mumbling Creations
               <a href="{% url 'item_detail' item.pk %}">more</a>
             </p>
           </div>
+          {% if item.clearance %}
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><del>£{{ item.original_price }}</del><strong class="text-danger">
+                £{{ item.price }}</strong></li>
+          </ul>
+          {% else %}
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>£{{ item.price }}</strong></li>
           </ul>
+          {% endif %}
           <!-- If filtered by category don't show the category link-->
           {% if filtered %}
           {% else %}

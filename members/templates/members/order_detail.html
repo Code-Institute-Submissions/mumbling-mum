@@ -12,14 +12,14 @@ Thank You
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">Order Details</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Order Details</h1><br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-</br>
+<br>
 <div class="row justify-content-center">
     <div class="col-md-6">
         <!-- order Summary -->
@@ -75,7 +75,7 @@ Thank You
         <hr>
         <div class="row">
             <div class="col">
-                <p></p>{{ order.street_address1 }}</p>
+                <p>{{ order.street_address1 }}</p>
                 {% if street_address2 %}
                 <p>{{ order.street_address2 }}</p>
                 {% endif %}
@@ -92,7 +92,4 @@ Thank You
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}

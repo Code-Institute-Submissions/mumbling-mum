@@ -130,7 +130,7 @@ def manage_items_by_category(request, cat_id):
         return redirect(reverse('home'))
 
 @login_required
-def manage_categories(request):
+def manage_item_categories(request):
     """ A view to show items filtered by category """
     user= request.user
     if user.is_staff:

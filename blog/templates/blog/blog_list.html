@@ -101,14 +101,12 @@ The Mumbling Mum
         <div class="col">
             <i class="far fa-thumbs-up"></i> {{ entry.likes.count }}
         </div>
-        <div class="col">
-            Comments
-        </div>
     </div>
     {% if manage_blog %}
-    <p><a href="{% url 'edit_blog_entry' entry.pk %}" class="card-link">Edit</a></p>
+</br>
+    <a href="{% url 'edit_blog_entry' entry.pk %}" class="btn btn-light border-dark card-link">Edit</a>
     <!-- Button trigger delete modal -->
-    <p><a data-toggle="modal" data-target="#deleteModal{{entry.pk}}" class="card-link">Delete</a></p>
+    <a data-toggle="modal" data-target="#deleteModal{{entry.pk}}" class="btn btn-light border-dark card-link">Delete</a>
     <!--  Modal -->
     <div class="modal fade" id="deleteModal{{entry.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">

@@ -7,7 +7,7 @@ The Mumbling Mum
 {% endblock %}
 {% block header %}
 <div class="row justify-content-center">
-    <div class="col center-text">
+    <div class="col center">
         </br></br></br></br>
         <h1>Mum Mumblings</h1></br>
         <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
@@ -23,11 +23,12 @@ The Mumbling Mum
     <div class="row">
         </br></br>
         <div class="col-4">
-            <a class="btn btn-secondary" type="button" href="{% url 'blog_list' %}">
+            <a class="btn btn-light border-dark" type="button" href="{% url 'blog_list' %}">
                 <i class="fas fa-angle-left"></i> Back
             </a>
         </div>
     </div>
+    <hr>
     <div class="row">
         <div class="col-sm-8">
             <h4>{{ blogentry.title }}</h4>
@@ -44,11 +45,12 @@ The Mumbling Mum
             {% endif %}
         </div>
     </div>
+    <hr>
     <!-- Only allow signed in Users to like and comment -->
     {% if user.is_authenticated %}
     <div class="row">
         <!-- Likes -->
-        <div class="col-md-3">
+        <div class="col-sm-2">
             <h6>Likes: {{ blogentry.likes.count }}</h6>
             {% if liked %}
             <form action="{% url 'like_entry' blogentry.pk %}" method="POST">
@@ -67,67 +69,82 @@ The Mumbling Mum
             {% endif %}
         </div>
         <!-- Comments -->
-        <div class="col-md-9">
-            <h6>Comments {{ comments.count }}</h6>
-            {% for comment in comments %}
-                {{comment.author}}
-                {{comment.post_date}}
-                {{comment.body}}
-                {% if comment.author == user%}
-                <p><a data-toggle="modal" data-target="#deleteModal{{comment.pk}}" class="card-link">Delete Comment</a></p>
-                <!--  Modal -->
-                <div class="modal fade" id="deleteModal{{comment.pk}}" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">DELETE COMMENT</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete your comment?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                <a id="delete" href="{% url 'delete_comment' blogentry.pk comment.pk %}"
-                                    class="btn btn-primary">Yes</a>
-                            </div>
+        <div class="col-sm-2">
+            <h6>Comments: {{ comments.count }}</h6>
+
+        </div>
+    </div>
+    <hr>
+
+    {% for comment in comments %}
+    <div class="row">
+        <div class="col-sm-6">
+            <h6>{{comment.author}} - {{comment.post_date}}</h6>
+            <p>{{comment.body}}</p>
+        </div>
+        <hr>
+        <div class="col-sm-6">
+            {% if comment.author == user%}
+            <p><a data-toggle="modal" data-target="#deleteModal{{comment.pk}}"
+                    class="btn btn-light border-dark card-link">Delete Comment</a></p>
+            <!--  Modal -->
+            <div class="modal fade" id="deleteModal{{comment.pk}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">DELETE COMMENT</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete your comment?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light border-dark" data-dismiss="modal">No</button>
+                            <a id="delete" href="{% url 'delete_comment' blogentry.pk comment.pk %}"
+                                class="btn btn-primary">Yes</a>
                         </div>
                     </div>
                 </div>
-                {% endif %}
-        {% endfor %}
-        <form method="POST" action="{% url 'add_comment' blogentry.pk %}">
-        <!-- enctype="multipart/form-data"> -->
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-secondary" type="submit">Add Comment</button>
-        </form>
-        
-
-
+            </div>
+            {% else %}
+            <div class="col-sm-6"></div>
+            {% endif %}
         </div>
     </div>
-    {% else %}
+    <hr>
+    {% endfor %}
     <div class="row">
-        <!-- Likes -->
-        <div class="col-md-3">
-            <h6>Likes: {{ blogentry.likes.count }}</h6>
-        </div>
-        <!-- Comments -->
-        <div class="col-md-9">
-            <h6>Comments {{ comments.count }}</h6>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col"></br>
-            <p>You must be logged in to Like or Comment. <a href="{% url 'account_login' %}">Log in here!</a> or            
-                <a href="{% url 'account_signup' %}">Register for an account here!</a></p>
+        <div class="col-sm-8">
+            <form method="POST" action="{% url 'add_comment' blogentry.pk %}">
+                <!-- enctype="multipart/form-data"> -->
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button class="btn btn-light border-dark" type="submit">Add Comment</button>
+            </form>
         </div>
     </div>
-    {% endif %}
+</div>
+{% else %}
+<div class="row">
+    <!-- Likes -->
+    <div class="col-sm-2">
+        <h6>Likes: {{ blogentry.likes.count }}</h6>
+    </div>
+    <!-- Comments -->
+    <div class="col-sm-2">
+        <h6>Comments {{ comments.count }}</h6>
+    </div>
+</div>
+<div class="row">
+    <div class="col"></br>
+        <p>You must be logged in to Like or Comment. <a href="{% url 'account_login' %}">Log in here!</a> or
+            <a href="{% url 'account_signup' %}">Register for an account here!</a></p>
+    </div>
+</div>
+{% endif %}
 </div>
 
 <hr>

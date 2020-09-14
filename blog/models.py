@@ -6,6 +6,7 @@ from datetime import datetime, date
 
 # blog categories
 class Category(models.Model):
+    """ A Model for Blog Categories - Referenced in the BlogEntry """
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -13,7 +14,7 @@ class Category(models.Model):
     
 
 class BlogEntry(models.Model):
-    # create blog db
+    """ A Model for blog entries """
     title = models.CharField(max_length=255)
     # e.g. 'Code BROWN'
     category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)
@@ -34,14 +35,13 @@ class BlogEntry(models.Model):
         # calculates likes for each blog entry 
         return self.likes.count()
 
-
     def __str__(self):
         return self.title + '|' +  str(self.author)
     
 class Comment(models.Model):
+    """ A model for blog comments """
     blog_entry = models.ForeignKey('BlogEntry', null=True, blank=False, on_delete=models.SET_NULL, editable=False)
     author= models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=False, editable=False, default='')
-    # author = models.ForeignKey(MemberProfile, on_delete=models.SET_NULL, null=True, blank=False, related_name='blog_comments', editable=False)
     body = models.TextField()
     post_date = models.DateField(auto_now_add=True)
 

@@ -2,22 +2,22 @@
 {% load static %}
 
 {% block title %}
-Add an Item
+Edit Blog Entry
 {% endblock %}
+
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br>
-        <h1 class="text-center">Admin</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Admin</h1><br>
         <h6 class="text-center">Edit Blog Entry</h6>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-</br>
-
+<br>
 <div class="row justify-content-center">
     <div class="col-sm-8">
         <form method="POST" action="{% url 'edit_blog_entry' blogentry.pk %}" enctype="multipart/form-data">
@@ -28,7 +28,4 @@ Add an Item
         </form>
     </div>
 </div>
-
-
-
 {% endblock %}

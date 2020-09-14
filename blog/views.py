@@ -18,7 +18,7 @@ def blog_list(request):
     return render(request, template_name, context)
 
 def blog_list_by_category(request, cat_id):
-    """ A view to blog entries filtered by category """
+    """ A view to show blog entries filtered by category """
     blogentries = BlogEntry.objects.filter(category=cat_id)
     categories = Category.objects.all()
     filtered = True
@@ -33,6 +33,7 @@ def blog_list_by_category(request, cat_id):
 
 @login_required
 def like_entry(request, blogentry_id):
+    """A View to record when the like button has been selected. """
     blogentry= get_object_or_404(BlogEntry, pk=blogentry_id)
     liked = False
     if blogentry.likes.filter(id=request.user.id).exists():
@@ -46,7 +47,7 @@ def like_entry(request, blogentry_id):
 
 
 def blog_detail(request, blogentry_id):
-    """ A view to show individual item details """ 
+    """ A view to show individual blog Entry, Comments and Likes""" 
     blogentry = get_object_or_404(BlogEntry, pk=blogentry_id)
     categories = Category.objects.all()
     comments = Comment.objects.filter(blog_entry=blogentry_id)
@@ -70,6 +71,7 @@ def blog_detail(request, blogentry_id):
 
 @login_required
 def add_blog_entry(request):
+    """ A view to display the add Blog Entry Form"""
     user = request.user
     if user.is_staff:
         if request.method == 'POST':
@@ -90,6 +92,7 @@ def add_blog_entry(request):
 
 @login_required
 def add_comment(request, blogentry_id):
+    """ A view to add a comment to a blog post"""
     user = request.user
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
@@ -101,6 +104,7 @@ def add_comment(request, blogentry_id):
 
 @login_required
 def delete_comment(request, blogentry_id, comment_id):
+    """ A view to delete a comment when the delete comment button is pressed """
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     return redirect(reverse('blog_detail', args=[blogentry_id] ))
@@ -128,7 +132,7 @@ def manage_blog(request):
 
 @login_required
 def manage_blog_by_category(request, cat_id):
-    """ A view to blog entries filtered by category """
+    """ A view to manage blog entries filtered by category """
     user= request.user
     if user.is_staff:
         manage_blog = True
@@ -147,7 +151,7 @@ def manage_blog_by_category(request, cat_id):
 
 @login_required
 def edit_blog_entry(request, blogentry_id):
-    """ A View to allow staff member to edit blog entries """
+    """ A View to allow staff member to edit blog entry """
     blogentry = get_object_or_404(BlogEntry, pk=blogentry_id)
     user = request.user
     if user.is_staff:
@@ -187,7 +191,7 @@ def manage_categories(request):
         }
         return render(request, template, context)
     else:
-        # redirect to home page only Staff can view tha manage items page
+        # redirect to home page only Staff can view the manage items page
         return redirect(reverse('home'))
 
 @login_required
@@ -208,10 +212,8 @@ def add_category(request):
 
 @login_required
 def edit_category(request, cat_id):
-    """ A view to allow staff to edit an item to the store """
-    print(cat_id)
+    """ A view to allow staff to edit a blog category """
     category = get_object_or_404(Category, pk=cat_id)
-    print(category)
     if request.method == 'POST':
         form = CategoryForm(request.POST or None, request.FILES or None, instance=category)
         if form.is_valid():
@@ -228,7 +230,7 @@ def edit_category(request, cat_id):
 
 @login_required
 def delete_category(request, cat_id):
-    """ Delete an item from the store """
+    """ Delete a blog category """
     category = get_object_or_404(Category, pk=cat_id)
     category.delete()
     return redirect(reverse('manage_categories'))

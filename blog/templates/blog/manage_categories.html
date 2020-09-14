@@ -7,18 +7,18 @@ Mumbling Creations
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">Manage Mumbling Creations Categories</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Manage Mumbling Creations Categories</h1><br>
         <h6 class="text-center">Edit, Delete and Add New Categories</h6>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-</br>
+<br>
 <div class="row">
-    </br></br>
+    <br><br>
     <div class="col-sm-4">
         <a class="btn btn-light border-dark" type="button" href="{% url 'manage_blog' %}">
             <i class="fas fa-angle-left"></i> Back
@@ -30,14 +30,13 @@ Mumbling Creations
         </a>
     </div>
 </div>
-</br>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="row">
                 {% for cat in categories %}
                 <div class="col-sm-4 card">
-                    <!-- <div class="card" style="width: 18rem;"> -->
                     <div class="card-body">
                         <h5 class="card-title">{{ cat.name }}</h5>
                     </div>

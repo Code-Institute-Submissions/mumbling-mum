@@ -8,31 +8,30 @@ The Mumbling Mum
 {% block header %}
 <div class="row">
     <div class="col-4 inline-block text-center">
-        </br>
+        <br>
         <img id="me" src="{% static 'images/me.jpg' %}">
-        </br>
+        <br>
     </div>
     <div class="col-8">
-        </br></br></br></br>
-        <h1>Mum Mumblings</h1></br>
+        <br><br><br><br>
+        <h1>Mum Mumblings</h1><br>
         <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.
             This is my blog where I like to share
             funny stories and what we have been up to. Enjoy!</h5>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-
-    </br>
+    <br>
     <div class="row justify-content-center">
-        </br></br>
+        <br><br>
         {% if manage_blog %}
         <div class="col-sm-4 center">
             <div class="dropdown">
-                <button class="btn btn-light border-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn btn-light border-dark dropdown-toggle" type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-filter"></i>
                     Blog Categories
@@ -45,23 +44,23 @@ The Mumbling Mum
                 </div>
             </div>
         </div>
-        </br></br>
+        <br><br>
         <div class="col-sm-4 center">
             <a class="btn btn-light border-dark" type="button" href="{% url 'add_blog_entry' %}">
                 <i class="fa fa-plus"></i> Add New Blog Post
             </a>
         </div>
-    </br></br>
+    <br><br>
         <div class="col-sm-4 center">
             <a class="btn btn-light border-dark" type="button" href="{% url 'manage_categories' %}">
                 <i class="fa fa-list"></i> Manage Blog Categories
             </a>
         </div>
-    </br></br>
+    <br><br>
         {% else %}
         <div class="col-sm-4">
             <div class="dropdown">
-                <button class="btn btn-light border-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn btn-light border-dark dropdown-toggle" type="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-filter"></i>
                     Blog Categories
@@ -103,7 +102,7 @@ The Mumbling Mum
         </div>
     </div>
     {% if manage_blog %}
-</br>
+<br>
     <a href="{% url 'edit_blog_entry' entry.pk %}" class="btn btn-light border-dark card-link">Edit</a>
     <!-- Button trigger delete modal -->
     <a data-toggle="modal" data-target="#deleteModal{{entry.pk}}" class="btn btn-light border-dark card-link">Delete</a>

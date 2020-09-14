@@ -8,20 +8,20 @@ The Mumbling Mum
 {% block header %}
 <div class="row justify-content-center">
     <div class="col center">
-        </br></br></br></br>
-        <h1>Mum Mumblings</h1></br>
+        <br><br><br><br>
+        <h1>Mum Mumblings</h1><br>
         <!-- <h6 class="text-center">Mumbling <i>(usually rude words through clenched teeth)</i> through motherhood since 2016.</h6> -->
         <h2>{{blogentry.title}}</h2>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    </br>
+    <br>
     <div class="row">
-        </br></br>
+        <br><br>
         <div class="col-4">
             <a class="btn btn-light border-dark" type="button" href="{% url 'blog_list' %}">
                 <i class="fas fa-angle-left"></i> Back
@@ -32,7 +32,7 @@ The Mumbling Mum
     <div class="row">
         <div class="col-sm-8">
             <h4>{{ blogentry.title }}</h4>
-            <small>Category: {{ blogentry.category }}</small></br>
+            <small>Category: {{ blogentry.category }}</small><br>
             <p>{{ blogentry.body }}</p>
         </div>
         <div class="col-sm-4">
@@ -71,11 +71,9 @@ The Mumbling Mum
         <!-- Comments -->
         <div class="col-sm-2">
             <h6>Comments: {{ comments.count }}</h6>
-
         </div>
     </div>
     <hr>
-
     {% for comment in comments %}
     <div class="row">
         <div class="col-sm-6">
@@ -139,14 +137,12 @@ The Mumbling Mum
     </div>
 </div>
 <div class="row">
-    <div class="col"></br>
+    <div class="col"><br>
         <p>You must be logged in to Like or Comment. <a href="{% url 'account_login' %}">Log in here!</a> or
             <a href="{% url 'account_signup' %}">Register for an account here!</a></p>
     </div>
 </div>
 {% endif %}
 </div>
-
 <hr>
-</div>
 {% endblock %}

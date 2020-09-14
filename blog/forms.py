@@ -16,7 +16,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model=Comment
         fields='__all__' #include all thefields
-        unlabelled_fields = ('body',)
+        unlabelled_fields = ('body',) # Remove body label 
     
     def __init__(self, *args, **kwargs):
         super(CommentForm, self).__init__(*args, **kwargs)

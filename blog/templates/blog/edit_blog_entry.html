@@ -23,8 +23,8 @@ Add an Item
         <form method="POST" action="{% url 'edit_blog_entry' blogentry.pk %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <a class="btn btn-secondary" href="{% url 'manage_blog' %}">Cancel</a>
-            <button class="btn btn-secondary" type="submit">Edit Blog Entry</button>
+            <a class="btn btn-light border-dark" href="{% url 'manage_blog' %}">Cancel</a>
+            <button class="btn btn-light border-dark" type="submit">Edit Blog Entry</button>
         </form>
     </div>
 </div>

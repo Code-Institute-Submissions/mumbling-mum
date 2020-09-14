@@ -4,7 +4,7 @@ from items.models import Item
 
 # to allow all apps to access the shopping bag contents
 def shopping_bag_contents(request):
-
+    """ Make shoppingbag contents available accross the site"""
     shopping_bag_items = []
     total = 0
     item_count= 0

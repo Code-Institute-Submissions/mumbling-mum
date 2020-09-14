@@ -15,7 +15,7 @@ The Mumbling Mum
     <div class="col-8">
         </br></br></br></br>
         <h1>Mum Mumblings</h1></br>
-        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys. 
+        <h5>Hi, I'm Mel (aka The Mumbling Mum). I am the mother of 2 small boys.
             This is my blog where I like to share
             funny stories and what we have been up to. Enjoy!</h5>
         </br>
@@ -30,9 +30,9 @@ The Mumbling Mum
     <div class="row justify-content-center">
         </br></br>
         {% if manage_blog %}
-        <div class="col-4">
+        <div class="col-sm-4 center">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn btn-light border-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-filter"></i>
                     Blog Categories
@@ -46,20 +46,22 @@ The Mumbling Mum
             </div>
         </div>
         </br></br>
-        <div class="col-4">
-            <a class="btn btn-secondary" type="button" href="{% url 'add_blog_entry' %}">
+        <div class="col-sm-4 center">
+            <a class="btn btn-light border-dark" type="button" href="{% url 'add_blog_entry' %}">
                 <i class="fa fa-plus"></i> Add New Blog Post
             </a>
         </div>
-        <div class="col-4">
-            <a class="btn btn-secondary" type="button" href="{% url 'manage_categories' %}">
+    </br></br>
+        <div class="col-sm-4 center">
+            <a class="btn btn-light border-dark" type="button" href="{% url 'manage_categories' %}">
                 <i class="fa fa-list"></i> Manage Blog Categories
             </a>
         </div>
+    </br></br>
         {% else %}
-        <div class="col-4">
+        <div class="col-sm-4">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                <button class="btn btn-light border-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-filter"></i>
                     Blog Categories

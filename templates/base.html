@@ -141,9 +141,9 @@
             <footer class="page-footer font-small bg-light pt-4">
                 <div class="container-fluid text-center">
                     <h5 class="text-uppercase">The Mumbling Mum</h5>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a target="_blank" href="https://www.pinterest.co.uk/"><i class="fab fa-pinterest"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
                 </div>
                 <div class="footer-copyright text-center py-3">© 2020 Copyright: The Mumbling Mum
                 </div>
@@ -155,7 +155,7 @@
 </html>
 {% block postloadjs %}
 <script type="text/javascript">
-    // used for staff member as an additional check before they delete an item in the store. 
+    // used across site for delete functions. 
     $(document).on("click", "#delete", function () {
         $('#deleteModal').modal('hide');
     });

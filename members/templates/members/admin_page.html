@@ -7,12 +7,12 @@ Site Admin
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
+        <br><br><br>
         <h1 class="text-center">Mumbling Admin - <small>Manage the Mumbles!</small></h1>
         <div class="row d-flex justify-content-center ">
             <h5>You are logged in as {{ user }}</h5>
         </div>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
@@ -21,18 +21,18 @@ Site Admin
 <div class="row">
     <div class="col-sm-6">
         <div id="manage-mumblings">
-            </br>
+            <br>
             <h2 class="text-center"><a href="{% url 'manage_blog'%}" class ="text-dark">Manage Mumblings</a></h2>
-            </br>
+            <br>
             <h5 class="text-center">Add New blog Posts, Edit Blog Posts, Highlight Blog Posts and Remove Blog Posts
             </h5>
         </div>
     </div>
     <div class="col-sm-6">
         <div id="manage-creations">
-            </br>
+            <br>
             <h2 class="text-center"><a href="{% url 'manage_items' %}" class ="text-dark">Manage Creations</a></h2>
-            </br>
+            <br>
             <h5 class="text-center">Add New Items, Edit Items, Move items to Clearance, mark items as Out of Stock and
                 Delete Items</h5>
         </div>

@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Category(models.Model):
+    """Category Model used for Item Categories """
     name = models.CharField(max_length=254)
     # e.g. 'fabric_baskets'
     display_name = models.CharField(max_length=254, null=True, blank=True)
@@ -15,6 +16,7 @@ class Category(models.Model):
         return self.display_name
 
 class Item(models.Model):
+    """ Item model used for item information """
     name = models.CharField(max_length=100)
     # e.g. 'Set of 2 Floral Fabric Baskets'
     category = models.ForeignKey('Category', null=True, blank=False, on_delete=models.SET_NULL)

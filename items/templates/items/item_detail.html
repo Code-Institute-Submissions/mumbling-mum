@@ -8,16 +8,16 @@ Mumbling Creations
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">Mumbling Creations</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Mumbling Creations</h1><br>
         <h6 class="text-center">Handmade Textile Gifts and Accessories</h6>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-</br>
+<br>
 
 <div class="row justify-content-center">
     <!-- Item Image -->
@@ -35,10 +35,10 @@ Mumbling Creations
                     class="card-link">{{ item.category.display_name}}</a></small></p>
         <p class="card-text">{{ item.description }}</p>
         {% if item.clearance %}
-        <h4><del>£{{ item.original_price }}</del><strong class="text-danger"> £{{ item.price }}</strong></h4></br>
+        <h4><del>£{{ item.original_price }}</del><strong class="text-danger"> £{{ item.price }}</strong></h4><br>
         {% else %}
         <h4><strong>£{{ item.price }}</strong></h4>
-        </br>
+        <br>
         {% endif %}
         {% if item.out_of_stock %}
             <h3> This Item is currently out of stock</h3>
@@ -49,7 +49,7 @@ Mumbling Creations
             <!-- Select Quantity Required -->
             <label for="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" min="1" max="5" value="1">
-            &nbsp &nbsp
+            &nbsp&nbsp
             <button type="submit" class="btn btn-secondary border-dark"><i class="fas fa-shopping-bag"></i>  Add to Bag</button>
             <input type="hidden" name="redirect_url" value="{{ request.path }}">
         </form>
@@ -59,9 +59,9 @@ Mumbling Creations
 </div>
 <div class="row justify-content-center">
     <div class="col-sm-8">
-    </br></br>
+    <br><br>
         <a class="btn btn-secondary btn-light border-dark" href="{% url 'items' %}"><i class="fas fa-chevron-left"></i>   Keep Shopping</a>
     </div>
 </div>
-</br>
+<br>
 {% endblock %}

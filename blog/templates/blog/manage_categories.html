@@ -7,44 +7,42 @@ Mumbling Creations
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">Manage Mumbling Creations Categories</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Manage Mumbling Creations Categories</h1><br>
         <h6 class="text-center">Edit, Delete and Add New Categories</h6>
-        </br>
-        </br>
+        <br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-</br>
+<br>
 <div class="row">
-    </br></br>
-    <div class="col-4">
-        <a class="btn btn-secondary" type="button" href="{% url 'manage_blog' %}">
+    <br><br>
+    <div class="col-sm-4">
+        <a class="btn btn-light border-dark" type="button" href="{% url 'manage_blog' %}">
             <i class="fas fa-angle-left"></i> Back
         </a>
     </div>
-
-    <div class="col-4">
-        <a class="btn btn-secondary" type="button" id="add-item-btn" href="{% url 'add_category' %}">
+    <div class="col-sm-4 center">
+        <a class="btn btn-light border-dark" type="button" id="add-item-btn" href="{% url 'add_category' %}">
             <i class="fas fa-plus"></i> Add an Category
         </a>
     </div>
 </div>
+<br>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="row">
                 {% for cat in categories %}
                 <div class="col-sm-4 card">
-                    <!-- <div class="card" style="width: 18rem;"> -->
                     <div class="card-body">
                         <h5 class="card-title">{{ cat.name }}</h5>
                     </div>
-                    <p><a href="{% url 'edit_category' cat.pk %}" class="card-link">Edit</a></p>
+                    <a href="{% url 'edit_category' cat.pk %}" class="btn btn-light border-dark">Edit</a>
                     <!-- Button trigger delete modal -->
-                    <p><a data-toggle="modal" data-target="#deleteModal{{cat.pk}}" class="card-link">Delete</a></p>
+                    <a data-toggle="modal" data-target="#deleteModal{{cat.pk}}" class="btn btn-light border-dark">Delete</a>
                     <!--  Modal -->
                     <div class="modal fade" id="deleteModal{{cat.pk}}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">

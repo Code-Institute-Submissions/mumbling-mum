@@ -2,6 +2,7 @@ from django import forms
 from .models import Order
 
 class OrderForm(forms.ModelForm):
+    """Order form based on the Order model"""
     class Meta:
         model=Order
         fields=('full_name', 'email', 'phone_number', 

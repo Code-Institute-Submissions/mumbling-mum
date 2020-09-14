@@ -10,6 +10,7 @@ from django_countries.fields import CountryField
 
 # Create your models here.
 class Order(models.Model):
+    """Model for when an order is generated"""
     # order no generated at time of order creation. See below
     # It is required and cannot be edited.
     order_no = models.CharField(max_length=32, null=False, editable=False)
@@ -32,12 +33,11 @@ class Order(models.Model):
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
     def _generate_order_no(self):
-        # Generate Order number using UUID
-        # random string of 32 characters
+        """Generate Order number using UUID random string of 32 characters """
         return uuid.uuid4().hex.upper()
     
     def update_total(self):
-
+        """ calculate the order total when the line items are added"""
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         # Aggregate - the value of multiple rows is grouped together to form a single summary value.
         self.delivery_cost = settings.STANDARD_DELIVERY_COST
@@ -55,6 +55,7 @@ class Order(models.Model):
         return self.order_no
 
 class OrderLineItem(models.Model):
+    """ Model for the Order line Items"""
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name = 'lineitems')
     item = models.ForeignKey(Item, null=False, blank=False, on_delete=models.CASCADE)
     quantity =  models.IntegerField(null=False, blank=False, default=0)

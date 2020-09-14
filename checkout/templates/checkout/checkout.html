@@ -3,7 +3,7 @@
 {% load checkout_tools %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 
@@ -13,15 +13,15 @@ Checkout
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">Checkout</h1></br>
+        <br><br><br>
+        <h1 class="text-center">Checkout</h1><br>
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
 <div class="overlay"></div>
-</br>
+<br>
 
 <div class="row justify-content-center">
     <div class="col-md-6">
@@ -35,36 +35,36 @@ Checkout
                 <th>Quantity</th>
                 <th>Sub Total</th>
             </tr>
-        {% for bag_item in shopping_bag_items %}
-        <tr>
-            <td><a href="{% url 'item_detail' bag_item.item_id %}"><strong>{{bag_item.item.name}}</strong></a></td>
-            <td>£{{bag_item.item.price}}</td>
-            <td>{{bag_item.quantity}}</td>
-            <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>     
-        </tr>
-        {% endfor %}
-        <tr>
-            <td></td>
-            <td></td>
-            <td><strong>Delivery Cost:</strong></td>
-            <td>
-                <p>£{{ delivery_cost }} </p>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td><strong>Grand Total: </strong></td>
-            <td>£{{ grand_total }}</td>
-        </tr>
-    </table>
-    <hr>        
+            {% for bag_item in shopping_bag_items %}
+            <tr>
+                <td><a href="{% url 'item_detail' bag_item.item_id %}"><strong>{{bag_item.item.name}}</strong></a></td>
+                <td>£{{bag_item.item.price}}</td>
+                <td>{{bag_item.quantity}}</td>
+                <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td><strong>Delivery Cost:</strong></td>
+                <td>
+                    <p>£{{ delivery_cost }} </p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><strong>Grand Total: </strong></td>
+                <td>£{{ grand_total }}</td>
+            </tr>
+        </table>
+        <hr>
     </div>
     <div class="col-md-6">
         <h6>Please fill out the form below to complete your order</h6>
         <hr>
         <!-- display order form - updated to use crispy forms to allow easy bootstrap styling-->
-        <form id="payment-form" method="POST" action="{% url 'checkout' %}" >
+        <form id="payment-form" method="POST" action="{% url 'checkout' %}">
             {% csrf_token %}
             <fieldset>
                 <legend>Personal Details:</legend>
@@ -82,13 +82,15 @@ Checkout
                 {{ order_form.country | as_crispy_field }}
                 <div class="form-check form-check-inline float-right mr-0">
                     {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                    <label class="form-check-label" for="id-save-info">Save this delivery information to my
+                        profile</label>
+                    <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
+                        checked>
                     {% else %}
-                        <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                        </label>
+                    <label class="form-check-label" for="id-save-info">
+                        <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
+                        <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                    </label>
                     {% endif %}
                 </div>
             </fieldset>
@@ -100,10 +102,12 @@ Checkout
                 <div id="card-errors"></div>
                 <!-- Pass the client secret to the view to get the payment intent -->
                 <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                <br/>
+                <br />
             </fieldset>
-            <a class="btn btn-light border-dark" href="{% url 'view_shopping_bag' %}"><i class="fas fa-shopping-bag"></i> Adjust shopping bag</a>&nbsp&nbsp
-            <button id="submit-button"class="btn btn-secondary border-dark" type="submit"><i class="far fa-credit-card"></i> Place Order</button>
+            <a class="btn btn-light border-dark" href="{% url 'view_shopping_bag' %}"><i
+                    class="fas fa-shopping-bag"></i> Adjust shopping bag</a>&nbsp&nbsp
+            <button id="submit-button" class="btn btn-secondary border-dark" type="submit"><i
+                    class="far fa-credit-card"></i> Place Order</button>
         </form>
 
     </div>
@@ -118,8 +122,8 @@ Checkout
 {% endblock %}
 
 {% block postloadjs %}
-    {{ block.super}}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{{ block.super}}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ client_secret|json_script:"id_client_secret" }}
+<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

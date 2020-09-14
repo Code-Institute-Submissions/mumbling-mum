@@ -8,8 +8,8 @@ Shopping Bag
 {% block header %}
 <div class="row">
     <div class="col-12">
-        </br></br></br>
-        <h1 class="text-center">My Shopping Bag</h1></br>
+        <br><br><br>
+        <h1 class="text-center">My Shopping Bag</h1><br>
     </div>
 </div>
 {% endblock %}
@@ -40,9 +40,7 @@ Shopping Bag
                     </td>
                     <td>£{{ bag_item.item.price | multiply:bag_item.quantity }}</td>
                 </tr>
-
                 {% endfor %}
-
                 <tr>
                     <td></td>
                     <td></td>
@@ -77,7 +75,6 @@ Shopping Bag
         <hr>
     </div>
 </div>
-</br>
+<br>
 </div>
-
 {% endblock %}

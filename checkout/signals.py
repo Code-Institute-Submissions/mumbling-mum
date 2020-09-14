@@ -7,7 +7,6 @@ from .models import OrderLineItem
 # if it has come from 'OrderLineItem' it will run this. 
 @receiver(post_save, sender=OrderLineItem)
 def update_on_save(sender, instance, created, **kwargs):
-    print('im running post_save')
     """ Update the order total when a lineitem is updated or created """
     instance.order.update_total()
 

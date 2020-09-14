@@ -16,6 +16,7 @@ import json
 
 @require_POST
 def cache_checkout_data(request):
+    """A view to cache the checkout data"""
     try:
         # payment intent ID
         pid = request.POST.get('client_secret').split('_secret')[0]
@@ -33,6 +34,7 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """ A view to render the checkout page and process the payment """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
@@ -132,9 +134,7 @@ def checkout(request):
     return render(request, template, context)
 
 def checkout_success(request, order_no):
-    """
-    Handle Successful checkout
-    """
+    """ Handle Successful checkout """
     save_info= request.session.get('save_info')
     order = get_object_or_404(Order, order_no=order_no)
 

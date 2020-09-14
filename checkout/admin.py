@@ -2,12 +2,13 @@ from django.contrib import admin
 from .models import Order, OrderLineItem
 
 class OrderLineItemAdminInline(admin.TabularInline):
-    # this is to add the line items to the same view in the admin as the order
+    """ add the line items to the same view in the admin as the order """
     model = OrderLineItem
     readonly_fields = ('lineitem_total',)
 class OrderAdmin(admin.ModelAdmin):
-    inlines = (OrderLineItemAdminInline,) # from above to display line items on same screen.
-    # declare some firelds read only so that they cannot be edited and compromise the order
+    """from above to display line items on same screen, 
+    declare some fields read only so that they cannot be edited and compromise the order"""
+    inlines = (OrderLineItemAdminInline,) 
     readonly_fields =('order_no', 'date',
                      'delivery_cost', 'order_total', 
                      'grand_total', 'original_bag_items',

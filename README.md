@@ -11,18 +11,58 @@ To view and purchase the items for sale and to read the blog, like and comment
  
 ## UX
  
-Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+I wanted the site to feel creative and fun. As the items for sale are sewing projects. I decided on a sewing theme for the background images. I wanted a mostly grey neutral tone with pops of colour.
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+User Stories:
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+-   As a new visitor to the site, i want to understand the purpose of the site from the homepage.
+-   As a new visitor to the site, I want to be able to view and purchase items for sale.
+-   As a new visitor, I want to be able to view the Blog posts.
+-   As a new visitor, I want to be able to sign up to become a member.
+-   As a member, I want to be able to easily Login.
+-   As a member, I want to be able to store my details to speed up future purchases.
+-   As a member, I want to be able to view my previous orders.
+-   As a member, I want to be able to read comments on blog posts.
+-   As a member, I want to be able to like blog posts.
+-   As a member, I want to be able to add comments to blog posts.
+-   As a member, I want to be able to delete my comments on blog posts.
+-   As a user, I want to be able to filter items for sale by category.
+-   As a user, I want to be able to filter blog posts by category.
+-   As a staff member, I want to be able to add new items for sale.
+-   As a staff member, I want to be able to create, update and delete item categories.
+-   As a staff member, I want to be able to remove items that are for sale.
+-   As a staff member, I want to be able to mark items as out of stock
+-   As a staff member, I want to be able to mark items as back in stock
+-   As a staff member, I want to be able to alter item details
+-   As a staff member, i want to be able to flag an item as clearance stock.
+-   As a staff member, I want to be able to un-flag an item as clearance stock.
+-   As a staff member, I want to be able to add a new blog post.
+-   As a staff member, I want to be able to edit a blog post.
+-   As a staff member, I want to be able to delete a blog post.
+-   As a staff member, I want to be able to create, update and delete blog categories. 
+
+Click here for [WireFrames](./docs/MS4Wireframes.pdf)
+
+Click here for [DatabaseSchema](./docs/MS4DatabaseSchema.pdf)
+
 
 ## Features
 
+### Navigation
+
+I wanted the navigation to be straight forward. The navbar includes links to the blog and the store login/my account and the shopping bag.
+
+### Homepage
+
+If a user is not logged in there is a section displayed on the homepage introducing me and the purpose of the site. There are also large buttons for login and sign Up.
+Below this are links to the blog and links to the store. 
+
 ### Creations
 
-The Creations page contains all the items for sale. They can be filtered by Category.
+The Creations page contains all the items for sale. They can be filtered by category.
+Each item can be selected by clicking on the image or the title. This takes the user to an item detail page where they can see the full details and select quantity and add to their shopping bag. 
+
+I have
 
 SKU - Stock Keeping Unit
 Even though the store is small, I thought it prudent for each Item to have a SKU. I decided to keep the SKU simple. I have used the category pk multiplied by 10 and the Item PK multiplied by 10. e.g. category.pk=1 and item.pk=20 SKU =10200. This ensures the SKU is always unique and never starts with 0. It also allows items to be easily identified and ordered by the SKU. 
@@ -45,18 +85,27 @@ For some/all of your features, you may choose to reference the specific project 
 In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
 
 ### Features Left to Implement
-- Another feature idea
+I have been very tight for time on this project and therefore there are a few improvements that I would like to add going forward.
+
+- Add link to latest products/clearance products to the homepage.
+- Add link to latest blog post to the homepage.
+- Filtering items in the store by clearance status. 
+- Sorting items in the store by Price high to low, low to high.
+- Improve the shopping bag and checkout layouts on the smallest devices.
+- Add the ability to like a comment in the blog.
+- Add the ability to add multiple images to the blog.   
 
 ## Technologies Used
 
 - [VSCode](https://code.visualstudio.com/)  
-    - I have used VSCode to develop this project as it is my preferred IDE. i have used .env to setup a virtual environment for development. 
+    - I have used VSCode to develop this project as it is my preferred IDE. I have used .env to setup a virtual environment for development. 
+    
 - [HTML](https://en.wikipedia.org/wiki/HTML5) 
 
 - [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 
 - [Bootstrap4](https://getbootstrap.com/)
-    - I have used Bootstrap to style the site. ADD MORE HERE...
+    - I have used Bootstrap to style the site. I have produced this in a short time frame and have therefore made use of the bootstrap grid to ensure a responsive design and many of the bootstrap classes for styling. This has allowed me to focus my efforts on getting the site functionality right.
 
 - [javascript](https://en.wikipedia.org/wiki/JavaScript)
 

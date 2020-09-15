@@ -19,10 +19,10 @@ Add an Item
 <br>
 
 <div class="row justify-content-center">
-    <form method="POST" action="{% url 'edit_category' category.pk %}" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'edit_item_category' category.pk %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
-        <a class="btn btn-light border-dark" href="{% url 'manage_categories' %}">Cancel</a>
+        <a class="btn btn-light border-dark" href="{% url 'manage_item_categories' %}">Cancel</a>
         <button class="btn btn-light border-dark" type="submit">Update Category</button>
     </form>
 </div>     

@@ -145,13 +145,13 @@ def manage_item_categories(request):
         return redirect(reverse('home'))
 
 @login_required
-def add_category(request):
+def add_item_category(request):
     """ A view to allow staff to add a new item to the store """
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect(reverse('manage_categories'))
+            return redirect(reverse('manage_item_categories'))
     else:
         form = CategoryForm()
         context = {
@@ -161,7 +161,7 @@ def add_category(request):
         return render(request, template, context)
 
 @login_required
-def edit_category(request, cat_id):
+def edit_item_category(request, cat_id):
     """ A view to allow staff to edit an item to the store """
     print(cat_id)
     category = get_object_or_404(Category, pk=cat_id)
@@ -170,7 +170,7 @@ def edit_category(request, cat_id):
         form = CategoryForm(request.POST or None, request.FILES or None, instance=category)
         if form.is_valid():
             form.save()
-            return redirect(reverse('manage_categories'))
+            return redirect(reverse('manage_item_categories'))
 
     else:
         form = CategoryForm(instance=category)
@@ -181,11 +181,11 @@ def edit_category(request, cat_id):
         return render(request, 'items/edit_category.html', context)
 
 @login_required
-def delete_category(request, cat_id):
+def delete_item_category(request, cat_id):
     """ Delete an item from the store """
     category = get_object_or_404(Category, pk=cat_id)
     category.delete()
-    return redirect(reverse('manage_categories'))
+    return redirect(reverse('manage_item_categories'))
 
 def stock_status(request, item_id):
     """ A View to change the stock status """

@@ -68,8 +68,8 @@ Each item can be selected by clicking on the image or the title. This takes the 
 
 ### Shopping Bag
 
-There are messages displayed when items are added to the bag. The message displays for a few seconds allowing the user to read the notification before it disappears automatically as not to allow the user to continue to peruse the site uninterrupted. 
-The Shopping bag contents are stored in session and are accessible across the site. Where ever a user is they can see the total in their bag.
+There are messages displayed when items are added to the bag. The message displays for a few seconds allowing the user to read the notification before it disappears automatically. This allows the user to continue to peruse the site uninterrupted. 
+The Shopping bag contents are stored in session and are accessible across the site. The grand total of the items in the shopping bag is visible across the site (in the Nav bar).
 
 ### Checkout
 
@@ -79,17 +79,19 @@ The Checkout page contains an order summary and Order Form.
 
 ### Mumblings
 
-Mumblings is the blog page. Here blog posts are listed. Each post can be selected and the user will be taken to a page detailing that blog entry. A logged in user can like the entry, read and add comments.
+Mumblings is the blog page. Here blog posts are listed. Each post can be selected and the user will be taken to a page detailing that blog entry. A logged in user can like the entry, read and add comments. An anonymous user can only view how many likes and comments there are.
 
 ### Admin 
 
 A 'staff' member can perform additional tasks. When logged in, in the 'My Account' drop down, on the nav bar, a staff member can access 'Mumbling Admin'. This brings them to a page where you can select 'Manage Creations' or 'Manage Mumblings'.
 
 #### Manage Creations
-The user is taken to a page showing all the items. Here Items can be editied, deleted or marked as out of stock. 
-Marking an item as out of stock adds a banner to the item card and prevents the item from being added to the shopping bag. If an Item is out of stock the admin can select 'back in stock' and this removes the banner and allows the item to be added to the shopping bag again. Selecting Edit takes the user to a form page that is populated with the item data. here the data can be modified and updated. There is also an option to flag an item as clearance. This adds a clearance banner to the top of the item card and show the original price alongside the reduced price in red. 
-A new item can also be added here. 'clicking Add a new item' takes the user to a form where they can add the item information. 
-there is also the opportunity to manage the item categories. by clicking on 'Manage categories' the user is taken to a page listing all categories which can be edited or deleted or a new category added.
+The user is taken to a page showing all the items. Here Items can be edited, deleted or marked as out of stock. 
+Marking an item as out of stock adds a banner to the item card and prevents the item from being added to the shopping bag. If an Item is out of stock the admin can select 'back in stock' and this removes the banner and allows the item to be added to the shopping bag again. Selecting Edit takes the user to a form page that is populated with the item data. Here the data can be modified and updated. There is also an option to flag an item as clearance, this adds a clearance banner to the top of the item card and show the original price alongside the reduced price in red. 
+
+A new item can also be added here. Clicking 'Add a new item' takes the user to a form where they can add the item information. 
+
+By clicking on 'Manage categories' the user is taken to a page listing all categories which can be edited or deleted or a new category added.
 
 #### Manage Mumbles
 The user is taken to a page listing the Blog Entries. Here entries can be edited or deleted.
@@ -98,10 +100,10 @@ There is also a button to 'Add a blog Entry' . When Selected the user is present
 Blog categories can also be managed from the Manage the mumbles page. Selecting 'Manage categories' the user is taken to a page listing all categories which can be edited or deleted or a new category added.
 
 ### Use of Toasts across the site
-I have used Bootstrap toasts to display messages using django message structure. For example when an item is added to the shopping bag, or when you have signed up or logged in , or if there is an issue with a password or login etc..
+I have used Bootstrap toasts to display messages using django message structure. For example, when an item is added to the shopping bag, when you have signed up or logged in, or if there is an issue with a password or login etc..
 
 ### Defensive Design
-I feel I have approached the development in a way to protect the intended functionality. All Admin features are not accessible if not logged in or if not staff user. I believe the design of the views and URLS protects the site so it is only used as intended.
+I feel I have approached the development in a way to protect the intended functionality. A user must be logged in as a staff user in order to access any admin features. I believe the design of the views and URLS protects the site so it is only used as intended.
  
 ### Features Left to Implement
 I have been very tight for time on this project and therefore there are a few improvements that I would like to add going forward.
@@ -113,7 +115,7 @@ I have been very tight for time on this project and therefore there are a few im
 - Improve the shopping bag and checkout layouts on the smallest devices.
 - Add the ability to like a comment in the blog.
 - Add the ability to add multiple images to the blog. 
-- Add the functionality of storing a users shopping bag if they log out before completing a purchase.  
+- Add the functionality of storing a user's shopping bag if they log out before completing a purchase.  
 - Invest further time in styling and font selection to improve look and feel.
 - Improve Nav layout on mobile devices
 
@@ -139,38 +141,44 @@ I have been very tight for time on this project and therefore there are a few im
 - [Heroku](heroku.com)
 
 - [GIMP](https://www.gimp.org/) 
-    - I have used GIMP (GNU Image Manipulation program) to crop, resize and modify images. Some of the images I selected were very high resolution and were causing the site to load very slowly so i resizes them to resolve this.
+    - I have used GIMP (GNU Image Manipulation program) to crop, resize and modify images. Some of the images I selected were a very high resolution and were causing the site to load very slowly so I resized them to resolve this.
 
 - [Balsamiq](https://balsamiq.com/)
     - I used Balsamiq to create the wireframes for the mumbling mum.
 
 
 - [Stripe](stripe.com)
-    I have integrated Stripe for the payments section of the site.
+    - I have integrated Stripe for the payments section of the site.
+
+- [github](github.com)
+    - I have used git hub for the version management of this site. I utilized separate git branches during development.   
 
 ## Testing
 
 HTML Validation: I have run each HTML file through the validator.w3.org and corrected any issues.
 
-Site Responsiveness: Throughout the development I have used Chrome developer tools to inspect each page on different device sizes. I have also encourage friends and family to take a look an provide feedback from using on different screen sizes. This has provided me with a degree of confidence in the design. 
+Site Responsiveness: Throughout the development I have used Chrome developer tools to inspect each page on different device sizes. I have also encourage friends and family to take a look and provide feedback from use on different screen sizes. This has provided me with a degree of confidence in the design. 
 
 Stripe Payments - I have tested the stripe elements following the documentation https://stripe.com/docs/testing. I created a webhook to ensure all payments are processed and this has been thoroughly tested during development.
 
-Throughout development I tested each feature. Following the Deployment I distributed the URL to several friends, and family members. The site has been used in anger and any niggles noted and rectified where possible. I am very confident that the site functions as explained here. Find the testing details below. Including an Admin logon which will allow you to access the additional "staff" user features.
+Throughout development I tested each feature. Following the Deployment I distributed the URL to several friends and family members. The site has been used in anger and any niggles noted and rectified where possible. I am very confident that the site functions as explained here. Find the testing details below, including an Admin logon which will allow you to access the additional "staff" user features.
 Click here for testing details: [Testing_Routine](./docs/MS4TestingRoutine.pdf)
 
-Due to very limited time and experience I have been unable to complete automated testing for this project. However, I feel that the level of testing that has been completed provides enough confidence that the site functions as intended.
+Due to very limited time and experience I have been unable to complete automated testing for this project. However, I feel that the level of testing that has been completed provides enough confidence that the site functions as intended. I managed to include a small amount in my previous project and I intend to spend some time getting to grips with this going forward and add it to this project following the assessment.
 
 ## Deployment
 
 ### Deploying to Heroku:
+
+During development in django the sqlite3 database is utilized. When the site was deployed a postgres database was utilized. This required several steps.
+
 I have deployed the mumbling mum app using Heroku.
 
 In order to do this, I first logged in to my Heroku account and created a new app. 
 In the dashboard of the new app I selected 'Resources' and in the 'add-ons' section I searched for 'Heroku Postgres' I selected this and provisioned it for the application.
  
 This in turn created a heroku config var: DATABASE_URL which I was then able to copy.
-Back in VSCode. I installed dj_database_url and modified the DATABASE section in settings.py to look for the DATABASE_URL in the environment variables, so, when deployed it will use the Heroku Postgres Database.
+Back in VSCode I installed dj_database_url and modified the DATABASE section in settings.py to look for the DATABASE_URL in the environment variables, so, when deployed it will use the Heroku Postgres Database.
 
 I then installed 'gunicorn' and updated my requirements.txt (pip freeze > requirements.txt). Next I created the Procfile.
 
@@ -178,34 +186,43 @@ I then logged in to Heroku (heroku login). At this point I did not want Heroku t
 
 I then added all the environment variables in the config vars.
 
+Heroku caonfig vars: [configvars](./docs/MS4HerokuConfigVars.pdf)
 
 I then added and committed my code to GIT then pushed to git hub and Heroku. I also linked my repository to Heroku so that with every push to the master branch would also be deployed to Heroku.
 
+The site is now operational but without the static files
+
 ### Setting up Static and Media files:
 I navigated to AWS and logged in. I searched for S3. After opening S3 I created a new bucket and called it 'the-mumbling-mum' and allowed public access.
-In the basic settings properties I turned on Static Website hosting .
-In the permissions tab I set up the CORS config, which is required for access between Heroku and the s3 bucket.
+In the basic settings properties I turned on Static Website hosting.
+In the permissions tab I set up the CORS config, which is required for access between Heroku and the S3 bucket.
 I also created a bucket policy using the policy generator and included the bucket ARN code to allow access to all resources.
 In the 'Access control' tab I set the list objects permission for 'everyone'.
-I then navigated to IAM (AWS Identity and Access Management). I created a group by creating an access policy to access all files in the S3 bucket
+I then navigated to IAM (AWS Identity and Access Management). I created a group by creating an access policy to access all files in the S3 bucket.
 
+Back in VSCode I installed 2 new packages boto3 and django-storages and followed the direction in the course notes to link up the S3 bucket.
 
+With DISABLE_COLLECTSTATIC=1 removed from the Heroku config vars and USE_AWS added everything was set up to collect static files each time git push issues an automatic heroku deployment.
 
+### Running locally
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+The code is set up so that it can be both run locally and on the deployed site. 
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+The main difference between running locally is the database and static storage settings. Therefore local environment variables will be required which have been omitted from git hub.
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+I used django-dotenv for the environment variables. Dependant on your IDE you may have your preferred method for this. 
+
+Local environment variables required are:
+- DEVELOPMENT = True
+- STRIPE_PUBLIC_KEY  
+- STRIPE_SECRET_KEY 
+- STRIPE_WH_SECRET
+- SECRET_KEY
+
+json files for the store categories and items can be found in the fixtures folder in the items app. These can easily be uploaded to your local sqlite3 and the site should be fully operational.
 
 
 ## Credits
-
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
 

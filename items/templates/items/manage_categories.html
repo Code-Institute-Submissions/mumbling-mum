@@ -22,7 +22,7 @@ Mumbling Creations
     <br><br>
     <div class="col-4">
         <a class="btn btn-light border-dark" type="button" id="add-item-btn" href="{% url 'add_item_category' %}">
-            <i class="fas fa-plus"></i> Add an Category
+            <i class="fas fa-plus"></i> Add a Category
         </a>
     </div>
 </div>
@@ -36,9 +36,9 @@ Mumbling Creations
                     <div class="card-body">
                         <h5 class="card-title">{{ cat.display_name }}</h5>
                     </div>
-                    <p><a href="{% url 'edit_item_category' cat.pk %}" class="card-link">Edit</a></p>
+                    <p><a href="{% url 'edit_item_category' cat.pk %}" class="btn btn-light border-dark card-link">Edit</a></p>
                     <!-- Button trigger delete modal -->
-                    <p><a data-toggle="modal" data-target="#deleteModal{{cat.pk}}" class="card-link">Delete</a></p>
+                    <p><a data-toggle="modal" data-target="#deleteModal{{cat.pk}}" class="btn btn-light border-dark card-link">Delete</a></p>
                     <!--  Modal -->
                     <div class="modal fade" id="deleteModal{{cat.pk}}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
